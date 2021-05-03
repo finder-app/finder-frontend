@@ -1,6 +1,10 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
+      <nuxt-link to="/auth/sign_in">
+        <v-btn>signIn</v-btn>
+      </nuxt-link>
+
       <v-text-field v-model="email"></v-text-field>
       <v-text-field v-model="password"></v-text-field>
       <v-btn @click="signUp()">signUp</v-btn>

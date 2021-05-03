@@ -1,9 +1,13 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <h1>{{ email }}</h1>
-      <h1>{{ password }}</h1>
+      <v-text-field v-model="email">{{ email }}</v-text-field>
+      <v-text-field v-model="password">{{ email }}</v-text-field>
       <v-btn @click="signIn()">signIn</v-btn>
+
+      <nuxt-link to="/auth/sign_up">
+        <v-btn>signUp</v-btn>
+      </nuxt-link>
     </v-col>
   </v-row>
 </template>
