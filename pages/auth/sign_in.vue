@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import firebase from '~/plugins/firebase'
 
 export default {
@@ -20,15 +18,13 @@ export default {
       password: 'adaadaada',
     }
   },
-  components: {
-    Logo,
-    VuetifyLogo
-  },
   methods: {
     async signIn() {
       try {
         const response = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         const user = response.user
+      console.log(response, 'response')
+      console.log(user, 'user')
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
         this.$router.push('/')

@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - forntend',
-    title: 'forntend',
+    titleTemplate: '%s - frontend',
+    title: 'finder-frontend',
     htmlAttrs: {
       lang: 'en'
     },
@@ -44,7 +44,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
   ],
 
 

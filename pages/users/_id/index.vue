@@ -3,34 +3,28 @@
     <v-col cols="12" sm="8" md="6">
       <nuxt-link to="/">BACK</nuxt-link>
 
-      <p>id: {{ book.ID }}</p>
-      <p>{{ book.Title }}</p>
-      <p>{{ book.CreatedAt }}</p>
+      <p>id: {{ user.id }}</p>
+      <p>{{ user.email }}</p>
+      <p>{{ user.createdAt }}</p>
 
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get(`/books/${ctx.route.params.id}`)
-      const book = response.data.data
+      const response = await ctx.$axios.get(`/users/${ctx.route.params.id}`)
+      const user = response.data
       return {
-        book,
+        user,
       }
     } catch(err) {
       console.error(err, 'err')
       console.error(err.response, 'err.response')
     }
   },
-  components: {
-    Logo,
-    VuetifyLogo
-  }
 }
 </script>
