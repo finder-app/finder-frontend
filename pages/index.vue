@@ -1,10 +1,11 @@
 <template>
   <v-container>
-    <div v-for="user in users" :key="user.id">
-      <nuxt-link :to="`users/${user.id}`">
-        <p>id: {{ user.id }}</p>
+    <div v-for="user in users" :key="user.uid">
+      <nuxt-link :to="`users/${user.uid}`">
+        <p>id: {{ user.uid }}</p>
       </nuxt-link>
       <p>{{ user.email }}</p>
+      <p>{{ user.isMale ? "男" : "メス" }}</p>
     </div>
   </v-container>
 </template>

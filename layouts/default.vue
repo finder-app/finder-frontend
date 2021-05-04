@@ -5,7 +5,9 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <nuxt-link to="/">
+        <v-toolbar-title v-text="title" />
+      </nuxt-link>
       <template v-if="authenticated">
         <v-btn @click="signOut()" color="green ml-5">signOut</v-btn>
       </template>

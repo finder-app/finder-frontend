@@ -3,10 +3,10 @@
     <v-col cols="12" sm="8" md="6">
       <v-text-field v-model="email">{{ email }}</v-text-field>
       <v-text-field v-model="password">{{ email }}</v-text-field>
-      <v-btn @click="signIn()">signIn</v-btn>
+      <v-btn @click="signIn()">ログインする！</v-btn>
 
       <nuxt-link to="/auth/sign_up">
-        <v-btn>signUp</v-btn>
+        <v-btn>新規登録ページに移動！</v-btn>
       </nuxt-link>
     </v-col>
   </v-row>
@@ -27,8 +27,6 @@ export default {
       try {
         const response = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         const user = response.user
-      console.log(response, 'response')
-      console.log(user, 'user')
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
         this.$router.push('/')
