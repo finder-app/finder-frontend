@@ -1,7 +1,6 @@
 import camelcaseKeys from 'camelcase-keys'
 export default (ctx) => {
   ctx.$axios.onRequest((config) => {
-
     config.headers = {
       'Authorization': `Bearer ${ctx.store.getters['getIdToken']}`
     }
