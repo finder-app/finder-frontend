@@ -5,7 +5,7 @@
       <v-text-field v-model="password">{{ email }}</v-text-field>
       <v-btn @click="signIn()">ログインする！</v-btn>
 
-      <nuxt-link to="/auth/sign_up">
+      <nuxt-link to="/auth/sign-up">
         <v-btn>新規登録ページに移動！</v-btn>
       </nuxt-link>
     </v-col>

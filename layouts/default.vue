@@ -49,7 +49,7 @@ export default {
       try {
         await firebase.auth().signOut()
         this.$store.dispatch('unsetIdToken')
-        this.$router.push('/auth/sign_in')
+        this.$router.push('/auth/sign-in')
       } catch(err) {
         console.err(err)
       }

@@ -14,7 +14,7 @@ export default (ctx) => {
   ctx.$axios.onError(error => {
     if (error.response.status === 401) {
       ctx.store.dispatch('unsetIdToken')
-      ctx.redirect('/auth/sign_in')
+      ctx.redirect('/auth/sign-in')
     }
   });
 }
