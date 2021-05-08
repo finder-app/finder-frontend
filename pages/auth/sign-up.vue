@@ -27,7 +27,7 @@ export default {
       try {
         const response = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         const user = response.user
-        console.log(response, 'response')
+        // console.log(response, 'response')
         console.log(user, 'user')
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
@@ -39,9 +39,9 @@ export default {
         const req = {
           uid: user.uid,
           email: user.email,
-          lastName: "大石",
-          firstName: "海渡",
-          isMale: 1,
+          lastName: "あすか",
+          firstName: "きらら",
+          isMale: 0,
         }
         await this.$axios.post("users/create", req)
         this.$router.push('/')
