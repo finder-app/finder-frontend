@@ -14,9 +14,8 @@
 export default {
   async asyncData(ctx) {
     try {
-      const response = await ctx.$axios.get("/users/index")
+      const response = await ctx.$axios.get("/users")
       const users = response.data
-      // console.log(users)
       return {
         users,
       }

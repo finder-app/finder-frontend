@@ -27,15 +27,8 @@ export default {
       try {
         const response = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         const user = response.user
-        // console.log(response, 'response')
-        console.log(user, 'user')
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
-
-        // idToken保存した後にリクエスト送るとエラー吐く
-        // http methodがOPTIONSになる
-        // idTokenが送れなくて、config.dataもJSON.stringifyの文字列化してる
-        // 前はgetリクエストとかでもエラー吐いてたけど解消した　原因は不明
         const req = {
           uid: user.uid,
           email: user.email,
@@ -43,7 +36,7 @@ export default {
           firstName: "きらら",
           isMale: 0,
         }
-        await this.$axios.post("users/create", req)
+        await this.$axios.post("users", req)
         this.$router.push('/')
       } catch(err) {
         console.error(err)
