@@ -25,21 +25,9 @@ export default {
   methods: {
     async signIn() {
       try {
-        // const response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        //   .then(() => {
-        //     return firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-        //   })
-          // catchなかったらtryの方に飛ぶのかなあ
-          // .catch((error) => {
-          //   // Handle Errors here.
-          //   var errorCode = error.code;
-          //   var errorMessage = error.message;
-          // });
-
         const response = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        const user = response.user
-        const idToken = await user.getIdToken(/* forceRefresh */ true)
-        this.$store.dispatch('setIdToken', { idToken })
+        const refreshToken = response.user.refreshToken
+        this.$store.dispatch('setRefreshToken', { refreshToken })
         this.$router.push('/')
       } catch(err) {
         console.error(err)

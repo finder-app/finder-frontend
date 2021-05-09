@@ -41,14 +41,14 @@ export default {
   },
   computed: {
     authenticated() {
-      return this.$store.getters['getIdToken']
+      return this.$store.getters['getUid']
     }
   },
   methods: {
     async signOut() {
       try {
         await firebase.auth().signOut()
-        this.$store.dispatch('unsetIdToken')
+        this.$store.dispatch('signOut')
         this.$router.push('/auth/sign-in')
       } catch(err) {
         console.err(err)

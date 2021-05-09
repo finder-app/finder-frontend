@@ -11,9 +11,13 @@
 </template>
 
 <script>
+import getUidByRefreshToken from '~/plugins/getUidByRefreshToken'
+
 export default {
+  // asyncDataの処理を共通化する
   async asyncData(ctx) {
     try {
+      await getUidByRefreshToken(ctx.store)
       const response = await ctx.$axios.get("/users")
       const users = response.data
       return {

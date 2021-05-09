@@ -27,8 +27,8 @@ export default {
       try {
         const response = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         const user = response.user
-        const idToken = await user.getIdToken(/* forceRefresh */ true)
-        this.$store.dispatch('setIdToken', { idToken })
+        const refreshToken = await user.getrefreshToken(/* forceRefresh */ true)
+        this.$store.dispatch('setRefreshToken', { refreshToken })
         const req = {
           uid: user.uid,
           email: user.email,
