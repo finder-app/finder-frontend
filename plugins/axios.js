@@ -7,6 +7,7 @@ export default async (ctx) => {
     if (uid) {
       config.headers.currentUserUid = uid
     }
+    console.log(uid, ": by config.headers.currentUserUid")
     return config
   })
   ctx.$axios.onResponse((response) => {
