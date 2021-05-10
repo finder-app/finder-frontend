@@ -1,45 +1,34 @@
 export const state = () => ({
-  refreshToken: null,
-  uid: null,
+  idToken: null,
 })
 
 export const getters = {
-  getRefreshToken: (state) => state.refreshToken,
-  getUid: (state) => state.uid,
+  getIdToken: (state) => state.idToken,
 }
 
 export const mutations = {
-  setRefreshToken(state, refreshToken) {
-    state.refreshToken = refreshToken;
-    localStorage.setItem('refreshToken', refreshToken)
+  setIdToken(state, idToken) {
+    state.idToken = idToken;
+    localStorage.setItem('idToken', idToken)
   },
-  setUid(state, uid) {
-    state.uid = uid;
-  },
-  unsetRefreshToken(state) {
-    state.refreshToken = null;
-    localStorage.removeItem('refreshToken')
-  },
-  unsetUid(state) {
-    state.uid = null;
+  unsetIdToken(state) {
+    state.idToken = null;
+    localStorage.removeItem('idToken')
   },
 };
 
 export const actions = {
   nuxtClientInit ({ commit }) {
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (refreshToken && refreshToken !== "undefined") {
-      commit('setRefreshToken', refreshToken);
+    const idToken = localStorage.getItem('idToken');
+    if (idToken) {
+      commit('setIdToken', idToken);
     }
   },
-  setRefreshToken({ commit }, payload) {
-    commit('setRefreshToken', payload.refreshToken)
+  setIdToken({ commit }, payload) {
+    // const idToken = JSON.parse()
+    commit('setIdToken', payload.idToken)
   },
-  setUid({ commit }, payload) {
-    commit('setUid', payload.uid)
-  },
-  signOut({ commit }) {
-    commit('unsetRefreshToken')
-    commit('unsetUid')
+  unsetIdToken({ commit }) {
+    commit('unsetIdToken')
   },
 }

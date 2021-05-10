@@ -26,8 +26,9 @@ export default {
     async signIn() {
       try {
         const response = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        const refreshToken = response.user.refreshToken
-        this.$store.dispatch('setRefreshToken', { refreshToken })
+        const user = response.user
+        const idToken = await user.getIdToken(/* forceRefresh */ true)
+        this.$store.dispatch('setIdToken', { idToken })
         this.$router.push('/')
       } catch(err) {
         console.error(err)

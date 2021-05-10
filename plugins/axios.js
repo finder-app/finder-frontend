@@ -1,13 +1,9 @@
 import camelcaseKeys from 'camelcase-keys'
 
-
-export default async (ctx) => {
+export default (ctx) => {
   ctx.$axios.onRequest((config) => {
-    const uid = ctx.store.getters['getUid']
-    if (uid) {
-      config.headers.currentUserUid = uid
-    }
-    console.log(uid, ": by config.headers.currentUserUid")
+    config.headers.Authorization = `Bearer ${ctx.store.getters['getIdToken']}`
+    console.log(config.headers.Authorization)
     return config
   })
   ctx.$axios.onResponse((response) => {
@@ -16,7 +12,7 @@ export default async (ctx) => {
   })
   ctx.$axios.onError(error => {
     if (error.response.status === 401) {
-      ctx.store.dispatch('signOut')
+      ctx.store.dispatch('unsetIdToken')
       ctx.redirect('/auth/sign-in')
     }
   });
