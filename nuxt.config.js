@@ -27,9 +27,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/nuxt-client-init',
     '~/plugins/axios',
     '~/plugins/firebase',
-    '~/plugins/nuxt-client-init',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -73,4 +73,14 @@ export default {
   axios: {
     baseURL: `http://localhost:8080`
   },
+
+  env: {
+    firebaseApiKey:            process.env.firebaseApiKey,
+    firebaseAuthDomain:        process.env.firebaseAuthDomain,
+    firebaseDatabaseURL:       process.env.firebaseDatabaseURL,
+    firebaseProjectId:         process.env.firebaseProjectId,
+    firebaseStorageBucket:     process.env.firebaseStorageBucket,
+    firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
+    firebaseAppId:             process.env.firebaseAppId,
+  }
 }
