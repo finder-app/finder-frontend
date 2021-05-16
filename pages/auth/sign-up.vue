@@ -32,9 +32,9 @@ export default {
         const req = {
           uid: user.uid,
           email: user.email,
-          lastName: "こじま",
-          firstName: "よしお",
-          isMale: true,
+          lastName: "有村",
+          firstName: "かすみ",
+          gender: "女性",
         }
         await this.$axios.post("users", req)
         this.$router.push('/')
