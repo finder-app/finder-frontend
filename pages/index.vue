@@ -5,7 +5,7 @@
         <p>id: {{ user.uid }}</p>
       </nuxt-link>
       <p>{{ user.email }}</p>
-      <p>{{ user.isMale ? "男" : "メス" }}</p>
+      <p>{{ user.gender }}</p>
     </div>
   </v-container>
 </template>
