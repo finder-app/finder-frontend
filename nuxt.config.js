@@ -37,6 +37,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://go.nuxtjs.dev/typescript
+    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
@@ -82,5 +84,14 @@ export default {
     firebaseStorageBucket:     process.env.firebaseStorageBucket,
     firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
     firebaseAppId:             process.env.firebaseAppId,
-  }
+  },
+
+  // NOTE: eslintをファイル保存時に実行させようとしたけどlayout/defaultでエラー吐くので保留
+  // typescript: {
+  //   typeCheck: {
+  //     eslint: {
+  //       files: './**/*.{ts,js,vue}'
+  //     }
+  //   }
+  // }
 }
