@@ -1,10 +1,8 @@
 <template>
   <div>
-    hoge
-    <!-- <script lang="ts">
-    export default {
-    }
-    </script> -->
+    <h1>
+      aaa
+    </h1>
   </div>
 </template>
 
@@ -12,16 +10,14 @@
 import Vue from 'vue'
 export default Vue.extend({
   data() {
+    const hoge: string = ''
+    console.log(hoge)
     const str: string = 'hogeeeeeeee'
-      console.log(str)
+    console.log(str)
     return {
       a: '',
+      b: ''
     }
   }
 })
 </script>
-
-<style>
-
-
-</style>
