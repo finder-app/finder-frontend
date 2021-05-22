@@ -1,9 +1,11 @@
 export const state = () => ({
-  idToken: null
+  idToken: null,
+  footPrintCount: 0,
 })
 
 export const getters = {
-  getIdToken: state => state.idToken
+  getIdToken: state => state.idToken,
+  getFootPrintCount: state => state.footPrintCount,
 }
 
 export const mutations = {
@@ -14,7 +16,10 @@ export const mutations = {
   unsetIdToken(state) {
     state.idToken = null
     localStorage.removeItem('idToken')
-  }
+  },
+  setFootPrintCount(state, footPrintCount) {
+    state.footPrintCount = footPrintCount
+  },
 }
 
 export const actions = {
@@ -29,5 +34,8 @@ export const actions = {
   },
   unsetIdToken({ commit }) {
     commit('unsetIdToken')
-  }
+  },
+  setFootPrintCount({ commit }, payload) {
+    commit('setFootPrintCount', payload.footPrintCount)
+  },
 }

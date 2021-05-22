@@ -8,3 +8,11 @@ export type User = {
   updatedAt: string
   deletedAt: string | null
 }
+
+export type FootPrint = {
+  visitorUid: string
+  userUid: string
+  unread: boolean
+  createdAt: string
+  updatedAt: string
+}
