@@ -16,20 +16,18 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/nuxt-client-init',
     '~/plugins/axios',
     '~/plugins/firebase',
+    '~/plugins/repository'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,14 +38,11 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/axios',
-  ],
-
+  modules: ['@nuxtjs/axios'],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -69,22 +64,21 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   axios: {
     baseURL: `http://localhost:8081`
   },
 
   env: {
-    firebaseApiKey:            process.env.firebaseApiKey,
-    firebaseAuthDomain:        process.env.firebaseAuthDomain,
-    firebaseDatabaseURL:       process.env.firebaseDatabaseURL,
-    firebaseProjectId:         process.env.firebaseProjectId,
-    firebaseStorageBucket:     process.env.firebaseStorageBucket,
+    firebaseApiKey: process.env.firebaseApiKey,
+    firebaseAuthDomain: process.env.firebaseAuthDomain,
+    firebaseDatabaseURL: process.env.firebaseDatabaseURL,
+    firebaseProjectId: process.env.firebaseProjectId,
+    firebaseStorageBucket: process.env.firebaseStorageBucket,
     firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
-    firebaseAppId:             process.env.firebaseAppId,
-  },
+    firebaseAppId: process.env.firebaseAppId
+  }
 
   // NOTE: eslintをファイル保存時に実行させようとしたけどlayout/defaultでエラー吐くので保留
   // typescript: {

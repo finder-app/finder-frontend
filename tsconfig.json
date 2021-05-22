@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
+    // コンパイルする形式
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Node",
+    // 型を認識する
     "lib": [
       "ESNext",
       "ESNext.AsyncIterable",
       "DOM"
     ],
     "esModuleInterop": true,
+    // jsもコンパイルする
     "allowJs": true,
+    // 渡すJSを定義？
     "sourceMap": true,
+    // 厳格に
     "strict": true,
+    // エラーだけ出力するように
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
@@ -25,12 +31,20 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "@nuxtjs/vuetify"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
+  // ----------------自分の設定------------
+  // 未使用のローカル変数があればerror
+  "noUnusedLocals": true,
+  // 未使用のparams引数があればerror
+  "noUnusedParameters": true,
+  // 明示的にreturnする。暗黙的なreturnを許さない
+  "noImplicitReturns": true,
 }
