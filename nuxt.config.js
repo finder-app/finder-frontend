@@ -9,14 +9,14 @@ export default {
     titleTemplate: '%s - frontend',
     title: 'finder-frontend',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -27,7 +27,7 @@ export default {
     '~/plugins/nuxt-client-init',
     '~/plugins/axios',
     '~/plugins/firebase',
-    '~/plugins/repository'
+    '~/plugins/repository',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -38,8 +38,16 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    // https://composition-api.nuxtjs.org/
+    // '@nuxtjs/composition-api',
+    '@nuxtjs/composition-api/module',
   ],
+
+  generate: {
+    // choose to suit your project
+    interval: 2000,
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],
@@ -57,24 +65,17 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    extend(config, { isClient }) {
-      // Extend only webpack config for client-bundle
-      if (isClient) {
-        config.devtool = '#source-map'
-      }
-    }
-  },
+  build: {},
 
   axios: {
-    baseURL: `http://localhost:8081`
+    baseURL: `http://localhost:8081`,
   },
 
   env: {
@@ -84,8 +85,8 @@ export default {
     firebaseProjectId: process.env.firebaseProjectId,
     firebaseStorageBucket: process.env.firebaseStorageBucket,
     firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
-    firebaseAppId: process.env.firebaseAppId
-  }
+    firebaseAppId: process.env.firebaseAppId,
+  },
 
   // NOTE: eslintをファイル保存時に実行させようとしたけどlayout/defaultでエラー吐くので保留
   // typescript: {

@@ -18,7 +18,6 @@ import { User } from '../apollo/model/generated'
 export default Vue.extend({
   // TODO: asyncDataの返り値をPromise<User[]>にしたいけど、returnでエラー吐く
   async asyncData(ctx: Context): Promise<any> {
-    // const users: Promise<User[]> = await ctx.app.$userRepository.GetUsers()
     const users: User[] = await ctx.app.$userRepository.GetUsers()
     return {
       users

@@ -15,4 +15,13 @@ export class UserRepository extends Repository {
       console.error(err.response)
     }
   }
+
+  async GetUserByUid(uid: string): Promise<User | void> {
+    try {
+      const response = await this.axios.get(`/users/${uid}`)
+      return response.data
+    } catch (err) {
+      console.error(err.response)
+    }
+  }
 }
