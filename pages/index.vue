@@ -20,21 +20,8 @@ export default Vue.extend({
   async asyncData(ctx: Context): Promise<any> {
     const users: User[] = await ctx.app.$userRepository.GetUsers()
     return {
-      users
+      users,
     }
-  }
+  },
 })
-// NOTE: js version
-// export default {
-//   async asyncData(ctx) {
-//     try {
-//       const users = await ctx.$userRepository.GetUsers()
-//       return {
-//         users
-//       }
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   }
-// }
 </script>

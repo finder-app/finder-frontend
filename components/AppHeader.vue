@@ -6,7 +6,7 @@
     <template v-if="authenticated">
       <v-btn @click="signOut()" color="green mx-5">signOut</v-btn>
     </template>
-    <nuxt-link to="/foot_prints"> 足跡数： {{ footPrintCount }}</nuxt-link>
+    <nuxt-link to="/foot_prints">未読の足跡数： {{ footPrintCount }}</nuxt-link>
   </v-app-bar>
 </template>
 

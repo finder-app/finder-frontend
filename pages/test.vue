@@ -200,11 +200,10 @@ export default Vue.extend({
         console.log(c.follower)
       }
     }
-    const input = document.getElementById('input') as HTMLInputElement
-    input.value
+    const input = document.getElementById('input')!
     return {
-      a: ''
+      a: '',
     }
-  }
+  },
 })
 </script>
