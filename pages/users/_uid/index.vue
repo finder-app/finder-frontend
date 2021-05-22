@@ -2,7 +2,6 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <nuxt-link to="/">BACK</nuxt-link>
-      {{ user }}
       <v-btn @click="test(user.uid)">test</v-btn>
       <!-- NOTE: compositionAPIを使うと、ライフサイクルの関係で表示できないため？ -->
       <template v-if="user">

@@ -6,7 +6,9 @@ import { FootPrintRepository } from '~/repository/foot_print'
 // pluginsでexport default(ctx)=>だと、ctx.$Hogeみたいに取れるようになる
 const RepositoryPlugin: Plugin = (ctx, inject) => {
   inject('userRepository', new UserRepository(ctx.app.$axios))
-  inject('footPrintRepository', new FootPrintRepository(ctx.app.$axios))
+  inject('footPrintRepository', new FootPrintRepository(
+    ctx.app.$axios, ctx.store
+  ))
 }
 
 export default RepositoryPlugin

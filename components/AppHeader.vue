@@ -27,11 +27,7 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
     useAsync(async () => {
-      // NOTE: 一旦全件取得する。今後headerを本格的に実装する時に、数を取得するエンドポイントを作成
-      const footPrint = await app.$footPrintRepository.GetFootPrints()
-      store.dispatch('setFootPrintCount', {
-        footPrintCount: footPrint.length,
-      })
+      await app.$footPrintRepository.GetUnreadCount()
     })
 
     // NOTE: ワンライナーはreturnなし、ブロックだとreturnが必要
