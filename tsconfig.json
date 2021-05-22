@@ -36,9 +36,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    ".nuxt",
-    "dist"
+    "node_modules"
   ],
   // ----------------自分の設定------------
   // 未使用のローカル変数があればerror

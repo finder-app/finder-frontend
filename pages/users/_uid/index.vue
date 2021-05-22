@@ -6,25 +6,23 @@
       <p>id: {{ user.uid }}</p>
       <p>{{ user.email }}</p>
       <p>{{ user.createdAt }}</p>
-
     </v-col>
   </v-row>
 </template>
 
 <script>
-
 export default {
   async asyncData(ctx) {
     try {
       const response = await ctx.$axios.get(`/users/${ctx.route.params.uid}`)
       const user = response.data
       return {
-        user,
+        user
       }
-    } catch(err) {
+    } catch (err) {
       console.error(err, 'err')
       console.error(err.response, 'err.response')
     }
-  },
+  }
 }
 </script>

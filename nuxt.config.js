@@ -64,7 +64,14 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extend(config, { isClient }) {
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = '#source-map'
+      }
+    }
+  },
 
   axios: {
     baseURL: `http://localhost:8081`

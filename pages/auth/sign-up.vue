@@ -19,30 +19,32 @@ export default {
   data() {
     return {
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada',
+      password: 'adaadaada'
     }
   },
   methods: {
     async signUp() {
       try {
-        const response = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        const response = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
         const user = response.user
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
         const req = {
           uid: user.uid,
           email: user.email,
-          lastName: "有村",
-          firstName: "かすみ",
-          gender: "女性",
+          lastName: '有村',
+          firstName: 'かすみ',
+          gender: '女性'
         }
-        await this.$axios.post("users", req)
+        await this.$axios.post('users', req)
         this.$router.push('/')
-      } catch(err) {
+      } catch (err) {
         console.error(err)
         console.error(err.response)
       }
-    },
+    }
   }
 }
 </script>

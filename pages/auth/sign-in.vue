@@ -19,22 +19,24 @@ export default {
   data() {
     return {
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada',
+      password: 'adaadaada'
     }
   },
   methods: {
     async signIn() {
       try {
-        const response = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        const response = await firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
         const user = response.user
         const idToken = await user.getIdToken(/* forceRefresh */ true)
         this.$store.dispatch('setIdToken', { idToken })
         this.$router.push('/')
-      } catch(err) {
+      } catch (err) {
         console.error(err)
         console.error(err.response)
       }
-    },
+    }
   }
 }
 </script>
