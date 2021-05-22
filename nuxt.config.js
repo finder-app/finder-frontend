@@ -1,5 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
+let backendEndpoint = 'http://localhost:8081'
+
+if (process.env.NODE_ENV === 'production') {
+  backendEndpoint = 'https://hogehoge.com'
+}
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -44,13 +50,14 @@ export default {
     '@nuxtjs/composition-api/module',
   ],
 
+  // NOTE: nuxt compotision APIのdocumentで書くことを推奨していたため
   generate: {
     // choose to suit your project
     interval: 2000,
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/apollo'],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -74,11 +81,8 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  axios: {
-    baseURL: `http://localhost:8081`,
-  },
-
   env: {
+    BACKEND_ENDPOINT: backendEndpoint,
     firebaseApiKey: process.env.firebaseApiKey,
     firebaseAuthDomain: process.env.firebaseAuthDomain,
     firebaseDatabaseURL: process.env.firebaseDatabaseURL,
@@ -86,6 +90,16 @@ export default {
     firebaseStorageBucket: process.env.firebaseStorageBucket,
     firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
     firebaseAppId: process.env.firebaseAppId,
+  },
+
+  axios: {
+    baseURL: `${backendEndpoint}`,
+  },
+
+  apollo: {
+    clientConfigs: {
+      default: '~/apollo/client-configs/default.ts',
+    },
   },
 
   // NOTE: eslintをファイル保存時に実行させようとしたけどlayout/defaultでエラー吐くので保留
