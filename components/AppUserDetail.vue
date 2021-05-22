@@ -15,26 +15,21 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useContext,
-  ref,
-  computed
-} from '@nuxtjs/composition-api'
+import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
     user: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props, ctx) {
     const fullName = computed(() => props.user.lastName + props.user.firstName)
     return {
-      fullName
+      fullName,
     }
-  }
+  },
 })
 </script>
 
