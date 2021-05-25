@@ -1,11 +1,12 @@
 <template>
   <v-container>
     <div v-for="user in users" :key="user.uid">
-      <nuxt-link :to="`users/${user.uid}`">
-        <p>id: {{ user.uid }}</p>
+      <nuxt-link :to="`users/${user.Uid}`">
+        <p>id: {{ user.Uid }}</p>
       </nuxt-link>
-      <p>{{ user.email }}</p>
-      <p>{{ user.gender }}</p>
+      <p>{{ user.Email }}</p>
+      <p>{{ fullName(user) }}</p>
+      <p>{{ user.Gender }}</p>
     </div>
   </v-container>
 </template>
@@ -22,6 +23,11 @@ export default Vue.extend({
     return {
       users,
     }
+  },
+  computed: {
+    fullName: () => {
+      return (user: User): string => user.LastName + user.FirstName
+    },
   },
 })
 </script>

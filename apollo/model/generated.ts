@@ -1,8 +1,3 @@
-// NOTE: 型のoptionを呼べないので一旦削除
-export type FootPrint = {
-  visitorUid: string
-}
-
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -14,27 +9,23 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Time: any;
+};
+
+export type FootPrint = {
+  __typename?: 'FootPrint';
+  CreatedAt: Scalars['Time'];
+  UpdatedAt: Scalars['Time'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createTodo: Todo;
   createUser: User;
-};
-
-
-export type MutationCreateTodoArgs = {
-  input: NewTodo;
 };
 
 
 export type MutationCreateUserArgs = {
   input: NewUser;
-};
-
-export type NewTodo = {
-  text: Scalars['String'];
-  userId: Scalars['String'];
 };
 
 export type NewUser = {
@@ -43,34 +34,18 @@ export type NewUser = {
 
 export type Query = {
   __typename?: 'Query';
-  todos: Array<Todo>;
-  todo: Todo;
-  users: Array<User>;
-  user: User;
+  GetUsers: Array<User>;
 };
 
-
-export type QueryTodoArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryUserArgs = {
-  id: Scalars['ID'];
-};
-
-export type Todo = {
-  __typename?: 'Todo';
-  id: Scalars['ID'];
-  text: Scalars['String'];
-  done: Scalars['Boolean'];
-  userID: Scalars['String'];
-  user: User;
-};
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  todos: Array<Todo>;
+  Uid: Scalars['String'];
+  Email: Scalars['String'];
+  LastName: Scalars['String'];
+  FirstName: Scalars['String'];
+  Gender: Scalars['String'];
+  CreatedAt: Scalars['Time'];
+  UpdatedAt: Scalars['Time'];
+  DeletedAt: Scalars['Time'];
 };
