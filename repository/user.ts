@@ -9,25 +9,23 @@ export class UserRepository extends Repository {
     super(axios, apollo)
   }
 
-  async GetUsers(): Promise<User[] | void> {
-    try {
-      const response = await this.apollo.query({
-        query: gql`
-          query GetUsers {
-            GetUsers {
-              Uid
-              Email
-              LastName
-              FirstName
-              Gender
-            }
-          }
-        `
-      })
-      return response.data.GetUsers
-    } catch (err) {
-      console.error(err.response)
-    }
+  GetUsers(): Promise<User[] | void> {
+    return this.axios.get(`/users`)
+    // const response = await this.apollo.query({
+    //   query: gql`
+    //       query GetUsers {
+    //         GetUsers {
+    //           Uid
+    //           Email
+    //           LastName
+    //           FirstName
+    //           Gender
+    //         }
+    //       }
+    //     `
+    // })
+    // return response.data.GetUsers
+    // NOTE: GraphQLの場合は、default.tsでerror handlingするのでrepoに書かない
   }
 
   async GetUserByUid(uid: string): Promise<User | void> {

@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <div v-for="user in users" :key="user.uid">
-      <nuxt-link :to="`users/${user.Uid}`">
-        <p>id: {{ user.Uid }}</p>
+      <nuxt-link :to="`users/${user.uid}`">
+        <p>id: {{ user.uid }}</p>
       </nuxt-link>
-      <p>{{ user.Email }}</p>
+      <p>{{ user.email }}</p>
       <p>{{ fullName(user) }}</p>
-      <p>{{ user.Gender }}</p>
+      <p>{{ user.gender }}</p>
     </div>
   </v-container>
 </template>
@@ -19,14 +19,20 @@ import { User } from '../apollo/model/generated'
 export default Vue.extend({
   // TODO: asyncDataの返り値をPromise<User[]>にしたいけど、returnでエラー吐く
   async asyncData(ctx: Context): Promise<any> {
-    const users: User[] = await ctx.app.$userRepository.GetUsers()
-    return {
-      users,
+    try {
+      const response = await ctx.app.$userRepository.GetUsers()
+      const users = response.data
+      console.log(response)
+      return {
+        users,
+      }
+    } catch (err) {
+      console.error(err.response)
     }
   },
   computed: {
     fullName: () => {
-      return (user: User): string => user.LastName + user.FirstName
+      return (user: any): string => user.lastName + user.firstName
     },
   },
 })
