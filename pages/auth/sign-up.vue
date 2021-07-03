@@ -16,10 +16,11 @@
 import firebase from '~/plugins/firebase'
 
 export default {
+  layout: 'auth',
   data() {
     return {
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada'
+      password: 'adaadaada',
     }
   },
   methods: {
@@ -36,7 +37,7 @@ export default {
           email: user.email,
           lastName: '有村',
           firstName: 'かすみ',
-          gender: '女性'
+          gender: '女性',
         }
         await this.$axios.post('users', req)
         this.$router.push('/')
@@ -44,7 +45,7 @@ export default {
         console.error(err)
         console.error(err.response)
       }
-    }
-  }
+    },
+  },
 }
 </script>
