@@ -14,10 +14,13 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref,
-  useContext,
   useAsync,
+  useContext,
+  ref,
   useRoute,
+  useStore,
+  computed,
+  useRouter,
 } from '@nuxtjs/composition-api'
 import { User } from '../../../apollo/model/generated'
 
@@ -25,6 +28,8 @@ export default defineComponent({
   setup() {
     const { app } = useContext()
     const route = useRoute()
+    const store = useStore()
+    const router = useRouter()
     const user = ref<User>()
     useAsync(async () => {
       user.value = await app.$userRepository.GetUserByUid(

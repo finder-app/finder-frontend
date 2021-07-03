@@ -10,23 +10,15 @@ export class FootPrintRepository extends Repository {
     super(axios, apollo)
   }
 
-  async GetFootPrints(): Promise<FootPrint[] | void> {
-    try {
-      const response = await this.axios.get('/foot_prints')
-      await this.GetUnreadCount()
-      return response.data
-    } catch (err) {
-      console.error(err.response)
-    }
+  async GetFootPrints(): Promise<FootPrint[]> {
+    const response = await this.axios.get('/foot_prints')
+    await this.getUnreadCount()
+    return response.data
   }
 
-  async GetUnreadCount(): Promise<void> {
-    try {
-      const response = await this.axios.get('/foot_prints/unread_count')
-      const footPrintCount = response.data
-      this.store.dispatch('setFootPrintCount', { footPrintCount })
-    } catch (err) {
-      console.error(err.response)
-    }
+  async getUnreadCount() {
+    const response = await this.axios.get('/foot_prints/unread_count')
+    const footPrintCount = response.data
+    this.store.dispatch('setFootPrintCount', { footPrintCount })
   }
 }

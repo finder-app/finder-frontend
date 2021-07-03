@@ -16,16 +16,19 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@nuxtjs/composition-api'
+import { User } from '../pb/user_pb'
 
 export default defineComponent({
   props: {
     user: {
-      type: Object,
+      type: Object as Vue.PropType<User.AsObject>,
       required: true,
     },
   },
   setup(props, ctx) {
-    const fullName = computed(() => props.user.lastName + props.user.firstName)
+    const fullName = computed(
+      (): string => props.user.lastName + props.user.firstName,
+    )
     return {
       fullName,
     }

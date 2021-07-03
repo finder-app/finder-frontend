@@ -23,7 +23,7 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtClientInit({ commit }) {
+  async nuxtClientInit({ commit }, ctx) {
     const idToken = localStorage.getItem('idToken')
     if (idToken) {
       commit('setIdToken', idToken)
