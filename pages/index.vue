@@ -12,28 +12,36 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Context } from '@nuxt/types'
-import { User } from '../apollo/model/generated'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  ref,
+  useRoute,
+  useStore,
+  computed,
+  useRouter,
+} from '@nuxtjs/composition-api'
+import { User } from '../pb/user_pb'
 
-export default Vue.extend({
-  // TODO: asyncDataの返り値をPromise<User[]>にしたいけど、returnでエラー吐く
-  async asyncData(ctx: Context): Promise<any> {
-    try {
-      const response = await ctx.app.$userRepository.GetUsers()
-      const users = response.data
-      console.log(response)
-      return {
-        users,
-      }
-    } catch (err) {
-      console.error(err.response)
+export default defineComponent({
+  setup() {
+    const { app } = useContext()
+    const route = useRoute()
+    const store = useStore()
+    const router = useRouter()
+    const users = ref<User.AsObject[]>()
+    useAsync(async () => {
+      const response = await app.$userRepository.GetUsers()
+      users.value = response.data.users
+    })
+    const fullName = computed(() => (user: User.AsObject): string =>
+      user.lastName + user.firstName,
+    )
+    return {
+      users,
+      fullName,
     }
-  },
-  computed: {
-    fullName: () => {
-      return (user: any): string => user.lastName + user.firstName
-    },
   },
 })
 </script>
