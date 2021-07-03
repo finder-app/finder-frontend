@@ -27,13 +27,22 @@ export class UserRepository extends Repository {
     // return response.data.GetUsers
     // NOTE: GraphQLの場合は、default.tsでerror handlingするのでrepoに書かない
   }
-
-  async GetUserByUid(uid: string): Promise<User.AsObject | void> {
-    try {
-      const response = await this.axios.get(`/users/${uid}`)
-      return response.data
-    } catch (err) {
-      console.error(err.response)
-    }
+  getUserByUid(uid: string): Promise<User.AsObject | void> {
+    return this.axios.get(`/users/${uid}`)
+    // try {
+    //   const response = await this.axios.get(`/users/${uid}`)
+    //   return response.data
+    // } catch (err) {
+    //   console.error(err.response)
+    // }
+  }
+  createUser(user: User.AsObject): Promise<User.AsObject | void> {
+    return this.axios.post('/users', user)
+    // try {
+    //   const response = await this.axios.get(`/users/${uid}`)
+    //   return response.data
+    // } catch (err) {
+    //   console.error(err.response)
+    // }
   }
 }

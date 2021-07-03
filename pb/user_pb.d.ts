@@ -5,8 +5,8 @@ import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 export class GetUsersReq extends jspb.Message {
-  getUid(): string;
-  setUid(value: string): void;
+  getCurrentUserUid(): string;
+  setCurrentUserUid(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetUsersReq.AsObject;
@@ -20,7 +20,7 @@ export class GetUsersReq extends jspb.Message {
 
 export namespace GetUsersReq {
   export type AsObject = {
-    uid: string,
+    currentUserUid: string,
   }
 }
 
@@ -43,6 +43,52 @@ export class GetUsersRes extends jspb.Message {
 export namespace GetUsersRes {
   export type AsObject = {
     usersList: Array<User.AsObject>,
+  }
+}
+
+export class GetUserByUidReq extends jspb.Message {
+  getUid(): string;
+  setUid(value: string): void;
+
+  getVisitorUid(): string;
+  setVisitorUid(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetUserByUidReq.AsObject;
+  static toObject(includeInstance: boolean, msg: GetUserByUidReq): GetUserByUidReq.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetUserByUidReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetUserByUidReq;
+  static deserializeBinaryFromReader(message: GetUserByUidReq, reader: jspb.BinaryReader): GetUserByUidReq;
+}
+
+export namespace GetUserByUidReq {
+  export type AsObject = {
+    uid: string,
+    visitorUid: string,
+  }
+}
+
+export class GetUserByUidRes extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetUserByUidRes.AsObject;
+  static toObject(includeInstance: boolean, msg: GetUserByUidRes): GetUserByUidRes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetUserByUidRes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetUserByUidRes;
+  static deserializeBinaryFromReader(message: GetUserByUidRes, reader: jspb.BinaryReader): GetUserByUidRes;
+}
+
+export namespace GetUserByUidRes {
+  export type AsObject = {
+    user?: User.AsObject,
   }
 }
 
@@ -72,6 +118,9 @@ export class User extends jspb.Message {
   getGender(): string;
   setGender(value: string): void;
 
+  getFullName(): string;
+  setFullName(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): User.AsObject;
   static toObject(includeInstance: boolean, msg: User): User.AsObject;
@@ -91,6 +140,7 @@ export namespace User {
     createdAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     updatedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     gender: string,
+    fullName: string,
   }
 }
 

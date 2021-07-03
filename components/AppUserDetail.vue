@@ -8,30 +8,21 @@
     <v-card-subtitle>
       <p class="font-weight-regular text--secondary">
         {{ user.email }}
-        {{ fullName }}
+        {{ user.fullName }}
       </p>
     </v-card-subtitle>
   </v-card>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api'
-import { User } from '../pb/user_pb'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
     user: {
-      type: Object as Vue.PropType<User.AsObject>,
+      type: Object,
       required: true,
     },
-  },
-  setup(props, ctx) {
-    const fullName = computed(
-      (): string => props.user.lastName + props.user.firstName,
-    )
-    return {
-      fullName,
-    }
   },
 })
 </script>

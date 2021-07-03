@@ -8,3 +8,9 @@
     </v-main>
   </v-app>
 </template>
+
+<script>
+export default {
+  middleware: 'authenticated',
+}
+</script>

@@ -3,9 +3,7 @@
     <nuxt-link to="/">
       <h1>finder</h1>
     </nuxt-link>
-    <template v-if="authenticated">
-      <v-btn @click="signOut()" color="green mx-5">signOut</v-btn>
-    </template>
+    <v-btn @click="signOut()" color="green mx-5">signOut</v-btn>
     <nuxt-link to="/foot_prints">未読の足跡数： {{ footPrintCount }}</nuxt-link>
   </v-app-bar>
 </template>
@@ -40,16 +38,12 @@ export default defineComponent({
     const footPrintCount = computed(
       (): number => store.getters.getFootPrintCount,
     )
-    const authenticated = computed(
-      (): boolean => store.getters['getIdToken'] !== null,
-    )
     const signOut = () => {
       store.dispatch('unsetIdToken')
       router.push('/auth/sign-in')
     }
     return {
       footPrintCount,
-      authenticated,
       signOut,
     }
   },

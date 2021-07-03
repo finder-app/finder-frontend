@@ -4,9 +4,9 @@
       <nuxt-link to="/">BACK</nuxt-link>
       <v-btn @click="test(user.uid)">test</v-btn>
       <!-- NOTE: compositionAPIを使うと、ライフサイクルの関係で表示できないため？ -->
-      <template v-if="user">
-        <app-user-detail :user="user"></app-user-detail>
-      </template>
+      <!-- <template v-if="user"> -->
+      <app-user-detail v-if="user" :user="user"></app-user-detail>
+      <!-- </template> -->
     </v-col>
   </v-row>
 </template>
@@ -22,7 +22,7 @@ import {
   computed,
   useRouter,
 } from '@nuxtjs/composition-api'
-import { User } from '../../../apollo/model/generated'
+import { User } from '../../../pb/user_pb'
 
 export default defineComponent({
   setup() {
@@ -30,11 +30,12 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    const user = ref<User>()
+    const user = ref<User.AsObject>()
     useAsync(async () => {
-      user.value = await app.$userRepository.GetUserByUid(
+      const response = await app.$userRepository.getUserByUid(
         route.value.params.uid,
       )
+      user.value = response.data.user
     })
     const test = (arg: any) => {
       console.log(arg, 'arg')

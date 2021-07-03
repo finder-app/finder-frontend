@@ -5,7 +5,7 @@
         <p>id: {{ user.uid }}</p>
       </nuxt-link>
       <p>{{ user.email }}</p>
-      <p>{{ fullName(user) }}</p>
+      <p>{{ user.fullName }}</p>
       <p>{{ user.gender }}</p>
     </div>
   </v-container>
@@ -32,15 +32,20 @@ export default defineComponent({
     const router = useRouter()
     const users = ref<User.AsObject[]>()
     useAsync(async () => {
-      const response = await app.$userRepository.GetUsers()
-      users.value = response.data.users
+      try {
+        const response = await app.$userRepository.GetUsers()
+        users.value = response.data.users
+      } catch (err) {
+        console.error(err.response)
+      }
     })
-    const fullName = computed(() => (user: User.AsObject): string =>
-      user.lastName + user.firstName,
-    )
+    // NOTE: protoファイルのおかげでcomputed必要なくなったけど、書き方忘れそうだから残しとく
+    // const fullName = computed(() => (user: User.AsObject): string =>
+    //   user.lastName + user.firstName,
+    // )
     return {
       users,
-      fullName,
+      // fullName,
     }
   },
 })
