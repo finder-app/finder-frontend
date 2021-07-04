@@ -29,10 +29,11 @@ export default {
     },
   },
   watch: {
-    // isShowが切り替わったら、メッセージの状態を確認
+    // NOTE: isShowが切り替わったら、メッセージの状態を確認
     isShow: function() {
       this.snackbar = this.$store.getters['message/existsMessage']
     },
+    // snackbarがfalseになったらmessageを消す。理由は説明できないけどこの処理は必要。2回目以降が表示できない
     snackbar: function() {
       if (!this.snackbar) {
         this.$store.dispatch('message/removeMessage')

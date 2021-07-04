@@ -5,6 +5,28 @@ var grpc = require('@grpc/grpc-js');
 var user_pb = require('./user_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
+function serialize_pb_CreateUserReq(arg) {
+  if (!(arg instanceof user_pb.CreateUserReq)) {
+    throw new Error('Expected argument of type pb.CreateUserReq');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_CreateUserReq(buffer_arg) {
+  return user_pb.CreateUserReq.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_CreateUserRes(arg) {
+  if (!(arg instanceof user_pb.CreateUserRes)) {
+    throw new Error('Expected argument of type pb.CreateUserRes');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_CreateUserRes(buffer_arg) {
+  return user_pb.CreateUserRes.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetUserByUidReq(arg) {
   if (!(arg instanceof user_pb.GetUserByUidReq)) {
     throw new Error('Expected argument of type pb.GetUserByUidReq');
@@ -72,6 +94,17 @@ var UserServiceService = exports.UserServiceService = {
     requestDeserialize: deserialize_pb_GetUserByUidReq,
     responseSerialize: serialize_pb_GetUserByUidRes,
     responseDeserialize: deserialize_pb_GetUserByUidRes,
+  },
+  createUser: {
+    path: '/pb.UserService/CreateUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.CreateUserReq,
+    responseType: user_pb.CreateUserRes,
+    requestSerialize: serialize_pb_CreateUserReq,
+    requestDeserialize: deserialize_pb_CreateUserReq,
+    responseSerialize: serialize_pb_CreateUserRes,
+    responseDeserialize: deserialize_pb_CreateUserRes,
   },
 };
 

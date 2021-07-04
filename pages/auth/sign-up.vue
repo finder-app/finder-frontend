@@ -131,6 +131,10 @@ export default defineComponent({
           store.dispatch('message/errorMessage', {
             message: '登録したEメールは既に使用されています。',
           })
+        } else {
+          store.dispatch('message/errorMessage', {
+            message: 'internal server errorr',
+          })
         }
         console.error(err.response)
       }

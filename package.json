@@ -29,6 +29,7 @@
     "grpc-tools": "^1.11.2",
     "nuxt": "^2.15.3",
     "save": "^2.4.0",
+    "snakecase-keys": "^4.0.2",
     "ts-protoc-gen": "^0.15.0",
     "vee-validate": "^3.4.10",
     "yarn": "^1.22.10"

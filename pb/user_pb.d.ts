@@ -92,6 +92,50 @@ export namespace GetUserByUidRes {
   }
 }
 
+export class CreateUserReq extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateUserReq.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateUserReq): CreateUserReq.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateUserReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateUserReq;
+  static deserializeBinaryFromReader(message: CreateUserReq, reader: jspb.BinaryReader): CreateUserReq;
+}
+
+export namespace CreateUserReq {
+  export type AsObject = {
+    user?: User.AsObject,
+  }
+}
+
+export class CreateUserRes extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): User | undefined;
+  setUser(value?: User): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CreateUserRes.AsObject;
+  static toObject(includeInstance: boolean, msg: CreateUserRes): CreateUserRes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CreateUserRes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CreateUserRes;
+  static deserializeBinaryFromReader(message: CreateUserRes, reader: jspb.BinaryReader): CreateUserRes;
+}
+
+export namespace CreateUserRes {
+  export type AsObject = {
+    user?: User.AsObject,
+  }
+}
+
 export class User extends jspb.Message {
   getUid(): string;
   setUid(value: string): void;
