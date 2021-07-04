@@ -18,7 +18,9 @@ export class FootPrintRepository extends Repository {
 
   async getUnreadCount() {
     const response = await this.axios.get('/foot_prints/unread_count')
-    const footPrintCount = response.data
-    this.store.dispatch('setFootPrintCount', { footPrintCount })
+    const unreadCount = response.data.unreadCount
+    // NOTE: gRPCのjson responseにomitemptyがあり 0 だとundefinedになるため
+    if (unreadCount === undefined) return
+    this.store.dispatch('setUnreadCount', { unreadCount })
   }
 }

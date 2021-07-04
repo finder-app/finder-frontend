@@ -4,7 +4,7 @@
       <h1>finder</h1>
     </nuxt-link>
     <v-btn @click="signOut()" color="green mx-5">signOut</v-btn>
-    <nuxt-link to="/foot_prints">未読の足跡数： {{ footPrintCount }}</nuxt-link>
+    <nuxt-link to="/foot_prints">未読の足跡数： {{ unreadCount }}</nuxt-link>
   </v-app-bar>
 </template>
 
@@ -35,9 +35,7 @@ export default defineComponent({
       }
     })
     // NOTE: ワンライナーはreturnなし、ブロックだとreturnが必要
-    const footPrintCount = computed(
-      (): number => store.getters.getFootPrintCount,
-    )
+    const unreadCount = computed((): number => store.getters.getUnreadCount)
     const signOut = () => {
       store.dispatch('unsetIdToken')
       router.push('/auth/sign-in')
@@ -50,7 +48,7 @@ export default defineComponent({
       )
     }
     return {
-      footPrintCount,
+      unreadCount,
       signOut,
     }
   },
