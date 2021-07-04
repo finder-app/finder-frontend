@@ -41,6 +41,13 @@ export default defineComponent({
     const signOut = () => {
       store.dispatch('unsetIdToken')
       router.push('/auth/sign-in')
+      setTimeout(
+        () =>
+          store.dispatch('message/successMessage', {
+            message: 'ログアウトしました。',
+          }),
+        100,
+      )
     }
     return {
       footPrintCount,

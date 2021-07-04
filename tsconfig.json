@@ -10,6 +10,8 @@
       "ESNext.AsyncIterable",
       "DOM"
     ],
+    // .jsonをimportできるように
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     // jsもコンパイルする
     "allowJs": true,

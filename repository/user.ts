@@ -11,7 +11,8 @@ export class UserRepository extends Repository {
 
   GetUsers(): Promise<User.AsObject[] | void> {
     return this.axios.get(`/users`)
-    // const response = await this.apollo.query({
+    // NOTE: GraphQLの場合は、default.tsでerror handlingするのでerr処理を書くな
+    // return await this.apollo.query({
     //   query: gql`
     //       query GetUsers {
     //         GetUsers {
@@ -24,25 +25,11 @@ export class UserRepository extends Repository {
     //       }
     //     `
     // })
-    // return response.data.GetUsers
-    // NOTE: GraphQLの場合は、default.tsでerror handlingするのでrepoに書かない
   }
   getUserByUid(uid: string): Promise<User.AsObject | void> {
     return this.axios.get(`/users/${uid}`)
-    // try {
-    //   const response = await this.axios.get(`/users/${uid}`)
-    //   return response.data
-    // } catch (err) {
-    //   console.error(err.response)
-    // }
   }
   createUser(user: User.AsObject): Promise<User.AsObject | void> {
     return this.axios.post('/users', user)
-    // try {
-    //   const response = await this.axios.get(`/users/${uid}`)
-    //   return response.data
-    // } catch (err) {
-    //   console.error(err.response)
-    // }
   }
 }

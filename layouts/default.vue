@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <app-notification></app-notification>
     <app-header></app-header>
     <v-main>
       <v-container>

@@ -34,6 +34,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/firebase',
     '~/plugins/repository',
+    '~/plugins/vee-validate',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
