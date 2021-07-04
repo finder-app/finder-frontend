@@ -7,18 +7,39 @@
       </nuxt-link>
       <p>{{ footPrint.visitor.email }}</p>
       <p>{{ footPrint.visitor.gender }}</p>
+      <p>{{ footPrint.visitor.fullName }}</p>
     </div>
   </v-container>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Context } from '@nuxt/types'
-import { FootPrint } from '../../apollo/model/generated'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  ref,
+  useRoute,
+  useStore,
+  computed,
+  useRouter,
+} from '@nuxtjs/composition-api'
+import { FootPrint } from '../../pb/foot_print_pb'
 
-export default Vue.extend({
-  async asyncData(ctx: Context): Promise<any> {
-    const footPrints: FootPrint[] = await ctx.app.$footPrintRepository.GetFootPrints()
+export default defineComponent({
+  setup() {
+    const { app } = useContext()
+    const route = useRoute()
+    const store = useStore()
+    const router = useRouter()
+    const footPrints = ref<FootPrint.AsObject[]>()
+    useAsync(async () => {
+      try {
+        const response = await app.$footPrintRepository.GetFootPrints()
+        footPrints.value = response
+      } catch (err) {
+        console.error(err.response)
+      }
+    })
     return {
       footPrints,
     }
