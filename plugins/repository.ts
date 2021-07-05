@@ -1,6 +1,7 @@
 import { Plugin } from '@nuxt/types'
 import { UserRepository } from '~/repository/user'
 import { FootPrintRepository } from '~/repository/foot_print'
+import { ProfileRepository } from '~/repository/profile'
 
 // NOTE: injectをするとapp配下に追加される。
 // pluginsでexport default(ctx)=>だと、ctx.$Hogeみたいに取れるようになる
@@ -9,6 +10,7 @@ const RepositoryPlugin: Plugin = (ctx, inject) => {
   const apollo = ctx.app.apolloProvider.defaultClient
   inject('userRepository', new UserRepository(axios, apollo))
   inject('footPrintRepository', new FootPrintRepository(axios, apollo, ctx.store))
+  inject('profileRepository', new ProfileRepository(axios, apollo))
 }
 
 export default RepositoryPlugin
