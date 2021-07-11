@@ -1,12 +1,19 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
+    <v-col v-if="user" cols="12" sm="8" md="6">
       <nuxt-link to="/">BACK</nuxt-link>
-      <v-btn @click="test(user.uid)">test</v-btn>
       <!-- NOTE: compositionAPIを使うと、ライフサイクルの関係で表示できないため？ -->
-      <!-- <template v-if="user"> -->
-      <app-user-detail v-if="user" :user="user"></app-user-detail>
-      <!-- </template> -->
+      <app-user-detail :user="user" />
+      <template v-if="user.liked">
+        <v-btn disabled>
+          いいね済み
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-btn @click="onClickLike(user.uid)">
+          いいね！
+        </v-btn>
+      </template>
     </v-col>
   </v-row>
 </template>
@@ -37,13 +44,23 @@ export default defineComponent({
       )
       user.value = response.data.user
     })
-    const test = (arg: any) => {
-      console.log(arg, 'arg')
-      console.log(user.value, 'user.value')
+    const onClickLike = async (userUid: string) => {
+      try {
+        await app.$likeRepository.createLike(userUid)
+        user.value.liked = true
+        store.dispatch('message/successMessage', {
+          message: 'いいねしました！',
+        })
+      } catch (err) {
+        store.dispatch('message/errorMessage', {
+          message: '既にいいね済みです！',
+        })
+        console.error(err.response)
+      }
     }
     return {
       user,
-      test,
+      onClickLike,
     }
   },
 })

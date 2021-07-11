@@ -1113,7 +1113,8 @@ proto.pb.User.toObject = function(includeInstance, msg) {
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     gender: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    fullName: jspb.Message.getFieldWithDefault(msg, 8, "")
+    fullName: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    liked: jspb.Message.getBooleanFieldWithDefault(msg, 9, false)
   };
 
   if (includeInstance) {
@@ -1183,6 +1184,10 @@ proto.pb.User.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setFullName(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setLiked(value);
       break;
     default:
       reader.skipField();
@@ -1268,6 +1273,13 @@ proto.pb.User.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       8,
+      f
+    );
+  }
+  f = message.getLiked();
+  if (f) {
+    writer.writeBool(
+      9,
       f
     );
   }
@@ -1453,6 +1465,24 @@ proto.pb.User.prototype.getFullName = function() {
  */
 proto.pb.User.prototype.setFullName = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional bool liked = 9;
+ * @return {boolean}
+ */
+proto.pb.User.prototype.getLiked = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.User} returns this
+ */
+proto.pb.User.prototype.setLiked = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
 };
 
 

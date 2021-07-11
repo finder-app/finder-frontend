@@ -165,6 +165,9 @@ export class User extends jspb.Message {
   getFullName(): string;
   setFullName(value: string): void;
 
+  getLiked(): boolean;
+  setLiked(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): User.AsObject;
   static toObject(includeInstance: boolean, msg: User): User.AsObject;
@@ -185,6 +188,7 @@ export namespace User {
     updatedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     gender: string,
     fullName: string,
+    liked: boolean,
   }
 }
 
