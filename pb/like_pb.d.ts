@@ -51,6 +51,48 @@ export namespace CreateLikeRes {
   }
 }
 
+export class GetOldestLikeReq extends jspb.Message {
+  getCurrentUserUid(): string;
+  setCurrentUserUid(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetOldestLikeReq.AsObject;
+  static toObject(includeInstance: boolean, msg: GetOldestLikeReq): GetOldestLikeReq.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetOldestLikeReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetOldestLikeReq;
+  static deserializeBinaryFromReader(message: GetOldestLikeReq, reader: jspb.BinaryReader): GetOldestLikeReq;
+}
+
+export namespace GetOldestLikeReq {
+  export type AsObject = {
+    currentUserUid: string,
+  }
+}
+
+export class GetOldestLikeRes extends jspb.Message {
+  hasLike(): boolean;
+  clearLike(): void;
+  getLike(): Like | undefined;
+  setLike(value?: Like): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetOldestLikeRes.AsObject;
+  static toObject(includeInstance: boolean, msg: GetOldestLikeRes): GetOldestLikeRes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetOldestLikeRes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetOldestLikeRes;
+  static deserializeBinaryFromReader(message: GetOldestLikeRes, reader: jspb.BinaryReader): GetOldestLikeRes;
+}
+
+export namespace GetOldestLikeRes {
+  export type AsObject = {
+    like?: Like.AsObject,
+  }
+}
+
 export class Like extends jspb.Message {
   getId(): number;
   setId(value: number): void;

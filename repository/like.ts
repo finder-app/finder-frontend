@@ -8,7 +8,11 @@ export class LikeRepository extends Repository {
     super(axios, apollo)
   }
 
-  createLike(userUid: string): Promise<Like.AsObject> {
+  createLike(userUid: string) {
     return this.axios.post(`/users/${userUid}/likes`)
+  }
+
+  getOldestLike(): Promise<Like.AsObject> {
+    return this.axios.get(`/likes`)
   }
 }

@@ -28,6 +28,28 @@ function deserialize_pb_CreateLikeRes(buffer_arg) {
   return like_pb.CreateLikeRes.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetOldestLikeReq(arg) {
+  if (!(arg instanceof like_pb.GetOldestLikeReq)) {
+    throw new Error('Expected argument of type pb.GetOldestLikeReq');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetOldestLikeReq(buffer_arg) {
+  return like_pb.GetOldestLikeReq.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetOldestLikeRes(arg) {
+  if (!(arg instanceof like_pb.GetOldestLikeRes)) {
+    throw new Error('Expected argument of type pb.GetOldestLikeRes');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetOldestLikeRes(buffer_arg) {
+  return like_pb.GetOldestLikeRes.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var LikeServiceService = exports.LikeServiceService = {
   createLike: {
@@ -40,6 +62,17 @@ var LikeServiceService = exports.LikeServiceService = {
     requestDeserialize: deserialize_pb_CreateLikeReq,
     responseSerialize: serialize_pb_CreateLikeRes,
     responseDeserialize: deserialize_pb_CreateLikeRes,
+  },
+  getOldestLike: {
+    path: '/pb.LikeService/GetOldestLike',
+    requestStream: false,
+    responseStream: false,
+    requestType: like_pb.GetOldestLikeReq,
+    responseType: like_pb.GetOldestLikeRes,
+    requestSerialize: serialize_pb_GetOldestLikeReq,
+    requestDeserialize: deserialize_pb_GetOldestLikeReq,
+    responseSerialize: serialize_pb_GetOldestLikeRes,
+    responseDeserialize: deserialize_pb_GetOldestLikeRes,
   },
 };
 

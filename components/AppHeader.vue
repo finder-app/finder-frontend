@@ -6,6 +6,7 @@
     <v-btn @click="signOut()" color="green mx-5">signOut</v-btn>
     <nuxt-link to="/foot_prints">未読の足跡数： {{ unreadCount }}</nuxt-link>
     <nuxt-link class="ml-10" to="/profile">プロフィール</nuxt-link>
+    <nuxt-link class="ml-10" to="/likes">いいね</nuxt-link>
   </v-app-bar>
 </template>
 
