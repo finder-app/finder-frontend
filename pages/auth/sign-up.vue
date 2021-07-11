@@ -112,6 +112,7 @@ export default defineComponent({
       gender: '女性',
       //   // NOTE: fullNameをつけないとTSの型でエラー吐く nullでもいけないかなあ〜何とかして
       fullName: '',
+      liked: false,
     })
     const signUp = async () => {
       try {

@@ -2,7 +2,6 @@
   <v-row justify="center" align="center">
     <v-col v-if="user" cols="12" sm="8" md="6">
       <nuxt-link to="/">BACK</nuxt-link>
-      <!-- NOTE: compositionAPIを使うと、ライフサイクルの関係で表示できないため？ -->
       <app-user-detail :user="user" />
       <template v-if="user.liked">
         <v-btn disabled>
@@ -47,7 +46,9 @@ export default defineComponent({
     const onClickLike = async (userUid: string) => {
       try {
         await app.$likeRepository.createLike(userUid)
-        user.value.liked = true
+        if (user.value !== undefined) {
+          user.value.liked = true
+        }
         store.dispatch('message/successMessage', {
           message: 'いいねしました！',
         })
