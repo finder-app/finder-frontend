@@ -15,4 +15,8 @@ export class LikeRepository extends Repository {
   getOldestLike(): Promise<Like.AsObject> {
     return this.axios.get(`/likes`)
   }
+
+  skip(userUid: string): Promise<Like.AsObject> {
+    return this.axios.put(`/likes/${userUid}/skip`)
+  }
 }

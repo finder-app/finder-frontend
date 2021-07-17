@@ -4,11 +4,13 @@
 // file: like.proto
 
 import * as like_pb from "./like_pb";
+import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 import * as grpc from "@grpc/grpc-js";
 
 interface ILikeServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
   createLike: grpc.MethodDefinition<like_pb.CreateLikeReq, like_pb.CreateLikeRes>;
   getOldestLike: grpc.MethodDefinition<like_pb.GetOldestLikeReq, like_pb.GetOldestLikeRes>;
+  skip: grpc.MethodDefinition<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
 }
 
 export const LikeServiceService: ILikeServiceService;
@@ -16,6 +18,7 @@ export const LikeServiceService: ILikeServiceService;
 export interface ILikeServiceServer extends grpc.UntypedServiceImplementation {
   createLike: grpc.handleUnaryCall<like_pb.CreateLikeReq, like_pb.CreateLikeRes>;
   getOldestLike: grpc.handleUnaryCall<like_pb.GetOldestLikeReq, like_pb.GetOldestLikeRes>;
+  skip: grpc.handleUnaryCall<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
 }
 
 export class LikeServiceClient extends grpc.Client {
@@ -26,4 +29,7 @@ export class LikeServiceClient extends grpc.Client {
   getOldestLike(argument: like_pb.GetOldestLikeReq, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
   getOldestLike(argument: like_pb.GetOldestLikeReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
   getOldestLike(argument: like_pb.GetOldestLikeReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
+  skip(argument: like_pb.SkipReq, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  skip(argument: like_pb.SkipReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  skip(argument: like_pb.SkipReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
 }
