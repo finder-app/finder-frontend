@@ -181,26 +181,35 @@ export default Vue.extend({
     // const aaa = new AAA('aaa')
     // const bbb = new BBB('bbb', aaa)
     // console.log(bbb.aaa.name)
-    type A = {
-      name: string
-      role: string
+    // type K = { name: string; obj: { hoge: string } }
+    // type A = {
+    //   name: string
+    //   role: string
+    // }
+    // class B {
+    //   // name: string
+    //   // follower: number
+    //   constructor(public name: string, public follower: number) {}
+    // }
+    // type C = A | B
+    // function desc(c: C): void {
+    //   console.log(c.name)
+    //   if ('role' in c) {
+    //     console.log(c.role)
+    //   }
+    //   if (c instanceof B) {
+    //     console.log(c.follower)
+    //   }
+    // }
+    // const input = document.getElementById('input')!
+    function copy<T extends { name: string }, U extends keyof T>(
+      value: T,
+      key: U,
+    ) {
+      value[key]
+      console.log(value[key])
     }
-    class B {
-      // name: string
-      // follower: number
-      constructor(public name: string, public follower: number) {}
-    }
-    type C = A | B
-    function desc(c: C): void {
-      console.log(c.name)
-      if ('role' in c) {
-        console.log(c.role)
-      }
-      if (c instanceof B) {
-        console.log(c.follower)
-      }
-    }
-    const input = document.getElementById('input')!
+    copy({ name: 'hoge' }, 'name')
     return {
       a: '',
     }
