@@ -118,6 +118,58 @@ export namespace SkipReq {
   }
 }
 
+export class ConsentLikeReq extends jspb.Message {
+  getSentUserUid(): string;
+  setSentUserUid(value: string): void;
+
+  getRecievedUserUid(): string;
+  setRecievedUserUid(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ConsentLikeReq.AsObject;
+  static toObject(includeInstance: boolean, msg: ConsentLikeReq): ConsentLikeReq.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ConsentLikeReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConsentLikeReq;
+  static deserializeBinaryFromReader(message: ConsentLikeReq, reader: jspb.BinaryReader): ConsentLikeReq;
+}
+
+export namespace ConsentLikeReq {
+  export type AsObject = {
+    sentUserUid: string,
+    recievedUserUid: string,
+  }
+}
+
+export class ConsentLikeRes extends jspb.Message {
+  hasLike(): boolean;
+  clearLike(): void;
+  getLike(): Like | undefined;
+  setLike(value?: Like): void;
+
+  hasRoom(): boolean;
+  clearRoom(): void;
+  getRoom(): Like | undefined;
+  setRoom(value?: Like): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ConsentLikeRes.AsObject;
+  static toObject(includeInstance: boolean, msg: ConsentLikeRes): ConsentLikeRes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ConsentLikeRes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConsentLikeRes;
+  static deserializeBinaryFromReader(message: ConsentLikeRes, reader: jspb.BinaryReader): ConsentLikeRes;
+}
+
+export namespace ConsentLikeRes {
+  export type AsObject = {
+    like?: Like.AsObject,
+    room?: Like.AsObject,
+  }
+}
+
 export class Like extends jspb.Message {
   getId(): number;
   setId(value: number): void;
