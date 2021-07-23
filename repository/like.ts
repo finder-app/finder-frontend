@@ -16,7 +16,11 @@ export class LikeRepository extends Repository {
     return this.axios.get(`/likes`)
   }
 
-  skip(userUid: string): Promise<Like.AsObject> {
-    return this.axios.put(`/likes/${userUid}/skip`)
+  skip(sentUserUid: string): Promise<Like.AsObject> {
+    return this.axios.put(`/likes/${sentUserUid}/skip`)
+  }
+
+  consent(sentUserUid: string): Promise<Like.AsObject> {
+    return this.axios.put(`/likes/${sentUserUid}/consent`)
   }
 }

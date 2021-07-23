@@ -10,7 +10,8 @@ import * as grpc from "@grpc/grpc-js";
 interface ILikeServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
   createLike: grpc.MethodDefinition<like_pb.CreateLikeReq, like_pb.CreateLikeRes>;
   getOldestLike: grpc.MethodDefinition<like_pb.GetOldestLikeReq, like_pb.GetOldestLikeRes>;
-  skip: grpc.MethodDefinition<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
+  skipLike: grpc.MethodDefinition<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
+  consentLike: grpc.MethodDefinition<like_pb.ConsentLikeReq, like_pb.ConsentLikeRes>;
 }
 
 export const LikeServiceService: ILikeServiceService;
@@ -18,7 +19,8 @@ export const LikeServiceService: ILikeServiceService;
 export interface ILikeServiceServer extends grpc.UntypedServiceImplementation {
   createLike: grpc.handleUnaryCall<like_pb.CreateLikeReq, like_pb.CreateLikeRes>;
   getOldestLike: grpc.handleUnaryCall<like_pb.GetOldestLikeReq, like_pb.GetOldestLikeRes>;
-  skip: grpc.handleUnaryCall<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
+  skipLike: grpc.handleUnaryCall<like_pb.SkipReq, google_protobuf_empty_pb.Empty>;
+  consentLike: grpc.handleUnaryCall<like_pb.ConsentLikeReq, like_pb.ConsentLikeRes>;
 }
 
 export class LikeServiceClient extends grpc.Client {
@@ -29,7 +31,10 @@ export class LikeServiceClient extends grpc.Client {
   getOldestLike(argument: like_pb.GetOldestLikeReq, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
   getOldestLike(argument: like_pb.GetOldestLikeReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
   getOldestLike(argument: like_pb.GetOldestLikeReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.GetOldestLikeRes>): grpc.ClientUnaryCall;
-  skip(argument: like_pb.SkipReq, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
-  skip(argument: like_pb.SkipReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
-  skip(argument: like_pb.SkipReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  skipLike(argument: like_pb.SkipReq, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  skipLike(argument: like_pb.SkipReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  skipLike(argument: like_pb.SkipReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  consentLike(argument: like_pb.ConsentLikeReq, callback: grpc.requestCallback<like_pb.ConsentLikeRes>): grpc.ClientUnaryCall;
+  consentLike(argument: like_pb.ConsentLikeReq, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.ConsentLikeRes>): grpc.ClientUnaryCall;
+  consentLike(argument: like_pb.ConsentLikeReq, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<like_pb.ConsentLikeRes>): grpc.ClientUnaryCall;
 }

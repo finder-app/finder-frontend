@@ -18,6 +18,28 @@ function deserialize_google_protobuf_Empty(buffer_arg) {
   return google_protobuf_empty_pb.Empty.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ConsentLikeReq(arg) {
+  if (!(arg instanceof like_pb.ConsentLikeReq)) {
+    throw new Error('Expected argument of type pb.ConsentLikeReq');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ConsentLikeReq(buffer_arg) {
+  return like_pb.ConsentLikeReq.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ConsentLikeRes(arg) {
+  if (!(arg instanceof like_pb.ConsentLikeRes)) {
+    throw new Error('Expected argument of type pb.ConsentLikeRes');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ConsentLikeRes(buffer_arg) {
+  return like_pb.ConsentLikeRes.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_CreateLikeReq(arg) {
   if (!(arg instanceof like_pb.CreateLikeReq)) {
     throw new Error('Expected argument of type pb.CreateLikeReq');
@@ -97,8 +119,8 @@ var LikeServiceService = exports.LikeServiceService = {
     responseSerialize: serialize_pb_GetOldestLikeRes,
     responseDeserialize: deserialize_pb_GetOldestLikeRes,
   },
-  skip: {
-    path: '/pb.LikeService/Skip',
+  skipLike: {
+    path: '/pb.LikeService/SkipLike',
     requestStream: false,
     responseStream: false,
     requestType: like_pb.SkipReq,
@@ -107,6 +129,17 @@ var LikeServiceService = exports.LikeServiceService = {
     requestDeserialize: deserialize_pb_SkipReq,
     responseSerialize: serialize_google_protobuf_Empty,
     responseDeserialize: deserialize_google_protobuf_Empty,
+  },
+  consentLike: {
+    path: '/pb.LikeService/ConsentLike',
+    requestStream: false,
+    responseStream: false,
+    requestType: like_pb.ConsentLikeReq,
+    responseType: like_pb.ConsentLikeRes,
+    requestSerialize: serialize_pb_ConsentLikeReq,
+    requestDeserialize: deserialize_pb_ConsentLikeReq,
+    responseSerialize: serialize_pb_ConsentLikeRes,
+    responseDeserialize: deserialize_pb_ConsentLikeRes,
   },
 };
 
