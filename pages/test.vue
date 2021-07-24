@@ -202,14 +202,40 @@ export default Vue.extend({
     //   }
     // }
     // const input = document.getElementById('input')!
-    function copy<T extends { name: string }, U extends keyof T>(
-      value: T,
-      key: U,
-    ) {
-      value[key]
-      console.log(value[key])
+    // function copy<T extends { name: string }, U extends keyof T>(
+    //   value: T,
+    //   key: U,
+    // ) {
+    //   value[key]
+    //   console.log(value[key])
+    // }
+    // copy({ name: 'hoge' }, 'name')
+    // interface hoge<T> {
+    //   data: T[]
+    // }
+    // const fuga: hoge<number> = {
+    //   data: [1, 2, 3],
+    // }
+    // const vegs: Array<string> = ['a', 'b', 'c']
+    // const vegs2 = ['a', 'b', 'c']
+    function Logging(message: string) {
+      return function Logging(constructor: Function) {
+        console.log(message)
+        console.log('logging...')
+        console.log(constructor)
+      }
     }
-    copy({ name: 'hoge' }, 'name')
+
+    @Logging('hoge')
+    class User {
+      name = 'Quill'
+      constructor() {
+        console.log('user created')
+      }
+    }
+    const u1 = new User()
+    const u2 = new User()
+    const u3 = new User()
     return {
       a: '',
     }
