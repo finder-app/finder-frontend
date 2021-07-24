@@ -49,13 +49,11 @@ export default defineComponent({
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
         store.dispatch('setIdToken', { idToken })
         // NOTE: layoutが変わる影響でsuccessMessageが表示できないため、遅延実行する
-        setTimeout(
-          () =>
-            store.dispatch('message/successMessage', {
-              message: 'ログインしました。',
-            }),
-          100,
-        )
+        setTimeout(() => {
+          store.dispatch('message/successMessage', {
+            message: 'ログインしました。',
+          })
+        }, 100)
         router.push('/')
       } catch (err) {
         console.error(err.response)

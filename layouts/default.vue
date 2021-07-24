@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <app-notification></app-notification>
-    <app-header></app-header>
     <v-main>
       <v-container>
+        <side-bar />
         <Nuxt />
       </v-container>
     </v-main>
