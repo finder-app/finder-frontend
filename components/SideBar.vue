@@ -25,7 +25,7 @@
 
     <template v-slot:append>
       <div class="pa-2">
-        <app-btn block @click="signOut()">
+        <app-btn block @click.native="signOut()">
           SIGN OUT
         </app-btn>
       </div>
