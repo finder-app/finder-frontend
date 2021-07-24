@@ -1,21 +1,15 @@
 <template>
-  <v-navigation-drawer app>
+  <v-navigation-drawer permanent app>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
-          finder
+          ✪finder
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-divider></v-divider>
-    <v-list dense nav>
+    <v-list>
       <v-list-item-group color="primary">
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-          :to="item.link"
-        >
+        <v-list-item v-for="item in items" :key="item.title" :to="item.link">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -31,9 +25,9 @@
 
     <template v-slot:append>
       <div class="pa-2">
-        <v-btn block @click="signOut()">
+        <app-btn block @click="signOut()">
           SIGN OUT
-        </v-btn>
+        </app-btn>
       </div>
     </template>
   </v-navigation-drawer>
@@ -67,6 +61,7 @@ export default defineComponent({
       // NOTE: storeからaxios.getすると読み込み順番のせいか認証ができない
       try {
         await app.$footPrintRepository.getUnreadCount()
+        // NOTE: unreadCountの値が更新された後に値を代入するため
         setItem()
       } catch (err) {
         console.error(err.response)
