@@ -1,16 +1,12 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <nuxt-link to="/">
-        BACK
-      </nuxt-link>
-      <!-- NOTE: compositionAPIを使うと、ライフサイクルの関係で表示できないため？ -->
+  <v-container>
+    <div class="card-wrapper">
       <app-user-detail v-if="user" :user="user" />
       <nuxt-link to="/profile/edit">
-        edit
+        <app-btn class="mt-5">編集ページに移動する</app-btn>
       </nuxt-link>
-    </v-col>
-  </v-row>
+    </div>
+  </v-container>
 </template>
 
 <script lang="ts">

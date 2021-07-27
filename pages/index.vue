@@ -1,12 +1,10 @@
 <template>
   <v-container>
-    <div v-for="user in users" :key="user.uid">
-      <nuxt-link :to="`users/${user.uid}`">
-        <p>uid: {{ user.uid }}</p>
-      </nuxt-link>
-      <p>{{ user.email }}</p>
-      <p>{{ user.fullName }}</p>
-      <p>{{ user.gender }}</p>
+    <div class="mb-10">
+      <h1>さがす</h1>
+    </div>
+    <div class="grid">
+      <user-card v-for="user in users" :key="user.uid" :user="user" />
     </div>
   </v-container>
 </template>
@@ -20,7 +18,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import { User } from '../pb/user_pb'
 
@@ -39,14 +37,18 @@ export default defineComponent({
         console.error(err.response)
       }
     })
-    // NOTE: protoファイルのおかげでcomputed必要なくなったけど、書き方忘れそうだから残しとく
-    // const fullName = computed(() => (user: User.AsObject): string =>
-    //   user.lastName + user.firstName,
-    // )
     return {
-      users,
-      // fullName,
+      users
     }
-  },
+  }
 })
 </script>
+
+<style lang="scss" scoped>
+.grid {
+  // NOTE: gapを追加すると、grid-gapも追加される
+  display: grid;
+  gap: 24px 16px;
+  grid-template-columns: repeat(5, minmax(0px, 1fr));
+}
+</style>
