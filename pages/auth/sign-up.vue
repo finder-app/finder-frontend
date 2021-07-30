@@ -14,7 +14,7 @@
           name="メールアドレス"
         >
           <v-text-field
-            v-model="signUpUser.email"
+            v-model="CreateUserReq.email"
             label="メールアドレス"
             :error-messages="errors"
             outlined
@@ -27,7 +27,7 @@
           name="パスワード"
         >
           <v-text-field
-            v-model="signUpUser.password"
+            v-model="password"
             label="パスワード"
             :error-messages="errors"
             outlined
@@ -41,7 +41,7 @@
           name="名前（性）"
         >
           <v-text-field
-            v-model="signUpUser.lastName"
+            v-model="CreateUserReq.lastName"
             label="名前（性）"
             :error-messages="errors"
             outlined
@@ -54,7 +54,7 @@
           name="名前（名）"
         >
           <v-text-field
-            v-model="signUpUser.firstName"
+            v-model="CreateUserReq.firstName"
             label="名前（名）"
             :error-messages="errors"
             outlined
@@ -63,7 +63,7 @@
         </ValidationProvider>
         <ValidationProvider v-slot="{ errors }" rules="required" name="性別">
           <v-select
-            v-model="signUpUser.gender"
+            v-model="CreateUserReq.gender"
             :items="['男性', '女性']"
             label="性別"
             outlined
@@ -91,7 +91,11 @@ import {
   useRouter
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
+<<<<<<< HEAD
 import { CreateUserReq } from '../../finder-protocol-buffers/ts/user_pb'
+=======
+import { CreateUserReq } from '../../pb/user_pb'
+>>>>>>> 656c735... fix/signUpの型を変更
 
 export default defineComponent({
   layout: 'auth',
@@ -100,25 +104,29 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
+<<<<<<< HEAD
     interface SignUpUser extends CreateUserReq.AsObject {
       password: string
     }
     const signUpUser = ref<SignUpUser>({
+=======
+    const CreateUserReq = ref<CreateUserReq.AsObject>({
+>>>>>>> 656c735... fix/signUpの型を変更
       uid: '',
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada',
       lastName: '有村',
       firstName: 'かすみ',
       gender: '女性',
       thumbnail: ''
     })
+    const password = ref<string>('')
     const signUp = async () => {
       try {
         const response = await firebase
           .auth()
           .createUserWithEmailAndPassword(
-            signUpUser.value.email,
-            signUpUser.value.password
+            CreateUserReq.value.email,
+            password.value
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
@@ -139,11 +147,12 @@ export default defineComponent({
       }
     }
     const createUser = async (firebaseUser: firebase.default.User) => {
-      signUpUser.value.uid = firebaseUser.uid
-      await app.$userRepository.createUser(signUpUser.value)
+      CreateUserReq.value.uid = firebaseUser.uid
+      await app.$userRepository.createUser(CreateUserReq.value)
     }
     return {
-      signUpUser,
+      CreateUserReq,
+      password,
       signUp
     }
   }
