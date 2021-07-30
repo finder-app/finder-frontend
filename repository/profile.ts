@@ -13,7 +13,11 @@ export class ProfileRepository extends Repository {
     return this.axios.get(`/profile`)
   }
 
-  updateProfile(user: User.AsObject): Promise<UpdateProfileRes> {
-    return this.axios.put(`/profile`, user)
+  updateProfile(requestFormData: FormData): Promise<UpdateProfileRes> {
+    return this.axios.put(`/profile`, requestFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 }
