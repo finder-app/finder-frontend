@@ -21,7 +21,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import { FootPrint } from '../../pb/foot_print_pb'
 
@@ -41,8 +41,8 @@ export default defineComponent({
       }
     })
     return {
-      footPrints,
+      footPrints
     }
-  },
+  }
 })
 </script>

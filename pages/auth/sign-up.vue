@@ -88,7 +88,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
 import { User } from '../../pb/user_pb'
@@ -112,7 +112,7 @@ export default defineComponent({
       gender: '女性',
       //   // NOTE: fullNameをつけないとTSの型でエラー吐く nullでもいけないかなあ〜何とかして
       fullName: '',
-      liked: false,
+      liked: false
     })
     const signUp = async () => {
       try {
@@ -120,7 +120,7 @@ export default defineComponent({
           .auth()
           .createUserWithEmailAndPassword(
             signUpUser.value.email,
-            signUpUser.value.password,
+            signUpUser.value.password
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
@@ -130,11 +130,11 @@ export default defineComponent({
       } catch (err) {
         if (err.code === 'auth/email-already-in-use') {
           store.dispatch('message/errorMessage', {
-            message: '登録したEメールは既に使用されています。',
+            message: '登録したEメールは既に使用されています。'
           })
         } else {
           store.dispatch('message/errorMessage', {
-            message: 'internal server errorr',
+            message: 'internal server errorr'
           })
         }
         console.error(err.response)
@@ -146,8 +146,8 @@ export default defineComponent({
     }
     return {
       signUpUser,
-      signUp,
+      signUp
     }
-  },
+  }
 })
 </script>

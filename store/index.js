@@ -1,11 +1,11 @@
 export const state = () => ({
   idToken: null,
-  unreadCount: 0,
+  unreadCount: 0
 })
 
 export const getters = {
   getIdToken: state => state.idToken,
-  getUnreadCount: state => state.unreadCount,
+  getUnreadCount: state => state.unreadCount
 }
 
 export const mutations = {
@@ -19,7 +19,7 @@ export const mutations = {
   },
   setUnreadCount(state, unreadCount) {
     state.unreadCount = unreadCount
-  },
+  }
 }
 
 export const actions = {
@@ -37,5 +37,5 @@ export const actions = {
   },
   setUnreadCount({ commit }, payload) {
     commit('setUnreadCount', payload.unreadCount)
-  },
+  }
 }

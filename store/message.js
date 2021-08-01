@@ -1,12 +1,12 @@
 export const state = () => ({
   message: null,
-  status: null,
+  status: null
 })
 
 export const getters = {
   getStatus: state => state.status,
   getMessage: state => state.message,
-  existsMessage: state => state.message !== null,
+  existsMessage: state => state.message !== null
 }
 
 export const mutations = {
@@ -20,7 +20,7 @@ export const mutations = {
   },
   removeMessage(state) {
     state.message = null
-  },
+  }
 }
 
 export const actions = {
@@ -32,5 +32,5 @@ export const actions = {
   },
   removeMessage({ commit }) {
     commit('removeMessage')
-  },
+  }
 }

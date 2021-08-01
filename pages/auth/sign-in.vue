@@ -22,7 +22,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
 
@@ -35,7 +35,7 @@ export default defineComponent({
     const router = useRouter()
     const signInUser = ref({
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada',
+      password: 'adaadaada'
     })
     const signIn = async () => {
       try {
@@ -43,7 +43,7 @@ export default defineComponent({
           .auth()
           .signInWithEmailAndPassword(
             signInUser.value.email,
-            signInUser.value.password,
+            signInUser.value.password
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
@@ -51,7 +51,7 @@ export default defineComponent({
         // NOTE: layoutが変わる影響でsuccessMessageが表示できないため、遅延実行する
         setTimeout(() => {
           store.dispatch('message/successMessage', {
-            message: 'ログインしました。',
+            message: 'ログインしました。'
           })
         }, 100)
         router.push('/')
@@ -61,8 +61,8 @@ export default defineComponent({
     }
     return {
       signInUser,
-      signIn,
+      signIn
     }
-  },
+  }
 })
 </script>

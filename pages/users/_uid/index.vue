@@ -26,7 +26,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import { User } from '../../../pb/user_pb'
 
@@ -39,7 +39,7 @@ export default defineComponent({
     const user = ref<User.AsObject>()
     useAsync(async () => {
       const response = await app.$userRepository.getUserByUid(
-        route.value.params.uid,
+        route.value.params.uid
       )
       user.value = response.data.user
     })
@@ -50,19 +50,19 @@ export default defineComponent({
           user.value.liked = true
         }
         store.dispatch('message/successMessage', {
-          message: 'いいねしました！',
+          message: 'いいねしました！'
         })
       } catch (err) {
         store.dispatch('message/errorMessage', {
-          message: '既にいいね済みです！',
+          message: '既にいいね済みです！'
         })
         console.error(err.response)
       }
     }
     return {
       user,
-      onClickLike,
+      onClickLike
     }
-  },
+  }
 })
 </script>

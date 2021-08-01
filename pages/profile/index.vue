@@ -18,7 +18,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import { User } from '../../pb/user_pb'
 
@@ -34,8 +34,8 @@ export default defineComponent({
       user.value = response.data.user
     })
     return {
-      user,
+      user
     }
-  },
+  }
 })
 </script>
