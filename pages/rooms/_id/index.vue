@@ -1,5 +1,10 @@
 <template>
-  <h1>rooms/{{ $route.params.id }}</h1>
+  <div>
+    <h2>rooms/{{ $route.params.id }}</h2>
+    <template v-for="message in messages">
+      {{ message }}
+    </template>
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,7 +18,9 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { User } from '../../../pb/user_pb'
+import { Message } from '../../../pb/message_pb'
+
+const messages = ref<Message.AsObject[]>([])
 
 export default defineComponent({
   setup() {
@@ -21,10 +28,18 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    const user = ref<User.AsObject>()
-    useAsync(async () => {})
+    useAsync(async () => {
+      try {
+        const response = await app.$axios.get(
+          `/rooms/${route.value.params.id}/messages`
+        )
+        messages.value = response.data.messages
+      } catch (err) {
+        console.error(err.response)
+      }
+    })
     return {
-      user
+      messages
     }
   }
 })
