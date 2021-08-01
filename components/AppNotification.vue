@@ -19,14 +19,14 @@
 export default {
   data() {
     return {
-      snackbar: false,
+      snackbar: false
     }
   },
   // NOTE: computedでmessageが存在するか監視
   computed: {
     isShow() {
       return this.$store.getters['message/existsMessage']
-    },
+    }
   },
   watch: {
     // NOTE: isShowが切り替わったら、メッセージの状態を確認
@@ -38,7 +38,7 @@ export default {
       if (!this.snackbar) {
         this.$store.dispatch('message/removeMessage')
       }
-    },
-  },
+    }
+  }
 }
 </script>

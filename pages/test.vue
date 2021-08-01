@@ -237,8 +237,8 @@ export default Vue.extend({
     const u2 = new User()
     const u3 = new User()
     return {
-      a: '',
+      a: ''
     }
-  },
+  }
 })
 </script>

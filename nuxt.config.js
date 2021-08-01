@@ -15,14 +15,14 @@ export default {
     titleTemplate: '%s - frontend',
     title: 'finder-frontend',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -34,7 +34,7 @@ export default {
     '~/plugins/axios',
     '~/plugins/firebase',
     '~/plugins/repository',
-    '~/plugins/vee-validate',
+    '~/plugins/vee-validate'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,13 +48,13 @@ export default {
     '@nuxtjs/vuetify',
     // https://composition-api.nuxtjs.org/
     // '@nuxtjs/composition-api',
-    '@nuxtjs/composition-api/module',
+    '@nuxtjs/composition-api/module'
   ],
 
   // NOTE: nuxt compotision APIのdocumentで書くことを推奨していたため
   generate: {
     // choose to suit your project
-    interval: 2000,
+    interval: 2000
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -72,10 +72,10 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
-    },
+          success: colors.green.accent3
+        }
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -89,18 +89,18 @@ export default {
     firebaseProjectId: process.env.firebaseProjectId,
     firebaseStorageBucket: process.env.firebaseStorageBucket,
     firebaseMessagingSenderId: process.env.firebaseMessagingSenderId,
-    firebaseAppId: process.env.firebaseAppId,
+    firebaseAppId: process.env.firebaseAppId
   },
 
   axios: {
-    baseURL: `${backendEndpoint}`,
+    baseURL: `${backendEndpoint}`
   },
 
   apollo: {
     clientConfigs: {
-      default: '~/apollo/client-configs/default.ts',
-    },
-  },
+      default: '~/apollo/client-configs/default.ts'
+    }
+  }
 
   // NOTE: eslintをファイル保存時に実行させようとしたけどlayout/defaultでエラー吐くので保留
   // typescript: {

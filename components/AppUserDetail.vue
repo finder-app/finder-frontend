@@ -33,9 +33,9 @@ export default defineComponent({
   props: {
     user: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 })
 </script>
 
