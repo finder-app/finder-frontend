@@ -50,11 +50,14 @@
           </div>
 
           <v-card-actions class="d-flex flex-column pb-10">
-            <nuxt-link v-if="room" :to="`/rooms/${room.id}`">
-              <app-btn color="pink lighten-2" class="white--text my-10" rounded>
-                さっそくトークスタート！
-              </app-btn>
-            </nuxt-link>
+            <app-btn
+              color="pink lighten-2"
+              class="white--text my-10"
+              rounded
+              @click.native="onClickGoToRoom()"
+            >
+              さっそくトークスタート！
+            </app-btn>
             <v-btn icon @click="onClickCloseLikedDialog()">
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -99,6 +102,13 @@ const likeNullObject: Like.AsObject = {
 const like = ref<Like.AsObject>(likeNullObject)
 const room = ref<Room.AsObject>()
 
+const openLikedDialog = () => {
+  likedDialog.value = true
+}
+const closeLikeDialog = () => {
+  likedDialog.value = false
+}
+
 export default defineComponent({
   setup() {
     const { app } = useContext()
@@ -129,9 +139,6 @@ export default defineComponent({
           message: 'スキップしました'
         })
       } catch (err) {
-        store.dispatch('message/errorMessage', {
-          message: 'エラーが発生しました。画面を更新して再度お試しください。'
-        })
         console.error(err.response)
       }
     }
@@ -141,26 +148,25 @@ export default defineComponent({
         room.value = response.data.room
         openLikedDialog()
       } catch (err) {
-        store.dispatch('message/errorMessage', {
-          message: 'エラーが発生しました。画面を更新して再度お試しください。'
-        })
         console.error(err.response)
       }
     }
-    const openLikedDialog = () => {
-      likedDialog.value = true
+    const onClickGoToRoom = () => {
+      router.push(`/rooms/${room.value!.id}`)
+      closeLikeDialog()
     }
     const onClickCloseLikedDialog = async () => {
-      likedDialog.value = false
       // NOTE: いいねdialogを閉じた後に次のユーザーを表示したいため
       await getOldestLike()
+      closeLikeDialog()
     }
     return {
       like,
+      room,
+      likedDialog,
       onClickSkip,
       onClickConsent,
-      likedDialog,
-      room,
+      onClickGoToRoom,
       onClickCloseLikedDialog
     }
   }
