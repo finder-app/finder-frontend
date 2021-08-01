@@ -1,5 +1,5 @@
 <template>
-  <h1>messages</h1>
+  <h1>rooms</h1>
 </template>
 
 <script>

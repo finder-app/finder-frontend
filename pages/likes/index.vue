@@ -50,10 +50,12 @@
           </div>
 
           <v-card-actions class="d-flex flex-column pb-10">
-            <app-btn color="pink lighten-2" class="white--text my-10" rounded>
-              さっそくトークスタート！
-            </app-btn>
-            <v-btn icon @click="onClickCloseDialog()">
+            <nuxt-link v-if="room" :to="`/rooms/${room.id}`">
+              <app-btn color="pink lighten-2" class="white--text my-10" rounded>
+                さっそくトークスタート！
+              </app-btn>
+            </nuxt-link>
+            <v-btn icon @click="onClickCloseLikedDialog()">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-card-actions>
@@ -80,8 +82,12 @@ import {
   useRouter
 } from '@nuxtjs/composition-api'
 import { Like } from '../../pb/like_pb'
+import { Room } from '../../pb/room_pb'
 
 // NOTE: setup()内を太らせたくないので、定数の定義をsetup()外に移行
+// debug
+const likedDialog = ref<boolean>(false)
+// const likedDialog = ref<boolean>(true)
 // NOTE: likeがなかった時に使用するnullを表現するobject
 const likeNullObject: Like.AsObject = {
   id: 0,
@@ -91,9 +97,7 @@ const likeNullObject: Like.AsObject = {
   consented: false
 }
 const like = ref<Like.AsObject>(likeNullObject)
-// const likedDialog = ref<boolean>(false)
-// debug
-const likedDialog = ref<boolean>(true)
+const room = ref<Room.AsObject>()
 
 export default defineComponent({
   setup() {
@@ -134,7 +138,7 @@ export default defineComponent({
     const onClickConsent = async (sentUserUid: string) => {
       try {
         const response = await app.$likeRepository.consent(sentUserUid)
-        console.log('response', response)
+        room.value = response.data.room
         openLikedDialog()
       } catch (err) {
         store.dispatch('message/errorMessage', {
@@ -146,15 +150,18 @@ export default defineComponent({
     const openLikedDialog = () => {
       likedDialog.value = true
     }
-    const onClickCloseDialog = () => {
+    const onClickCloseLikedDialog = async () => {
       likedDialog.value = false
+      // NOTE: いいねdialogを閉じた後に次のユーザーを表示したいため
+      await getOldestLike()
     }
     return {
       like,
       onClickSkip,
       onClickConsent,
       likedDialog,
-      onClickCloseDialog
+      room,
+      onClickCloseLikedDialog
     }
   }
 })

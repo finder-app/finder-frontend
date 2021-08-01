@@ -42,7 +42,7 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -75,34 +75,34 @@ export default defineComponent({
         {
           title: 'コミュニティ',
           link: '/communities',
-          icon: 'mdi-account-group-outline',
+          icon: 'mdi-account-group-outline'
         },
         {
           title: 'お相手から',
           link: '/likes',
-          icon: 'mdi-thumb-up-outline',
+          icon: 'mdi-thumb-up-outline'
         },
         {
           title: 'メッセージ',
-          link: '/messages',
-          icon: 'mdi-message-text-outline',
+          link: '/rooms',
+          icon: 'mdi-message-text-outline'
         },
         {
           title: 'プロフィール',
           link: '/profile',
-          icon: 'mdi-account-outline',
+          icon: 'mdi-account-outline'
         },
         // ぶっちゃけ足跡数を表示する必要ないけど、使ったしせっかくだから載せておく
         {
           title: `足跡(${unreadCount.value})`,
           link: '/foot_prints',
-          icon: 'mdi-shoe-print',
+          icon: 'mdi-shoe-print'
         },
         {
           title: 'その他',
           link: '/inquiry',
-          icon: 'mdi-format-list-bulleted',
-        },
+          icon: 'mdi-format-list-bulleted'
+        }
       ]
     }
     const signOut = () => {
@@ -110,15 +110,15 @@ export default defineComponent({
       router.push('/auth/sign-in')
       setTimeout(() => {
         store.dispatch('message/successMessage', {
-          message: 'ログアウトしました。',
+          message: 'ログアウトしました。'
         })
       }, 100)
     }
     return {
       unreadCount,
       signOut,
-      items,
+      items
     }
-  },
+  }
 })
 </script>

@@ -6,3 +6,8 @@
 .border-lightgray {
   border: 1px solid lightgray;
 }
+
+// NOTE: aタグにtext-decorationをつけないように
+a {
+  text-decoration: none;
+}
