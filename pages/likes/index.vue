@@ -87,10 +87,6 @@ import {
 import { Like } from '../../pb/like_pb'
 import { Room } from '../../pb/room_pb'
 
-// NOTE: setup()内を太らせたくないので、定数の定義をsetup()外に移行
-// debug
-const likedDialog = ref<boolean>(false)
-// const likedDialog = ref<boolean>(true)
 // NOTE: likeがなかった時に使用するnullを表現するobject
 const likeNullObject: Like.AsObject = {
   id: 0,
@@ -100,12 +96,13 @@ const likeNullObject: Like.AsObject = {
   consented: false
 }
 const like = ref<Like.AsObject>(likeNullObject)
+const likedDialog = ref<boolean>(false)
 const room = ref<Room.AsObject>()
 
 const openLikedDialog = () => {
   likedDialog.value = true
 }
-const closeLikeDialog = () => {
+const closeLikedDialog = () => {
   likedDialog.value = false
 }
 
@@ -153,12 +150,12 @@ export default defineComponent({
     }
     const onClickGoToRoom = () => {
       router.push(`/rooms/${room.value!.id}`)
-      closeLikeDialog()
+      closeLikedDialog()
     }
     const onClickCloseLikedDialog = async () => {
       // NOTE: いいねdialogを閉じた後に次のユーザーを表示したいため
       await getOldestLike()
-      closeLikeDialog()
+      closeLikedDialog()
     }
     return {
       like,
