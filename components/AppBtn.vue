@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    color="primary"
+    :color="color"
     :outlined="outlined"
     :rounded="rounded"
     :disabled="disabled"
@@ -17,22 +17,26 @@
 <script>
 export default {
   props: {
+    color: {
+      type: String,
+      default: 'primary'
+    },
     outlined: {
       type: Boolean,
-      default: false,
+      default: false
     },
     rounded: {
       type: Boolean,
-      default: false,
+      default: false
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     block: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 }
 </script>
