@@ -5,6 +5,7 @@ import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 import * as user_pb from "./user_pb";
+import * as room_pb from "./room_pb";
 
 export class CreateLikeReq extends jspb.Message {
   getSentUserUid(): string;
@@ -94,7 +95,7 @@ export namespace GetOldestLikeRes {
   }
 }
 
-export class SkipReq extends jspb.Message {
+export class SkipLikeReq extends jspb.Message {
   getSentUserUid(): string;
   setSentUserUid(value: string): void;
 
@@ -102,16 +103,16 @@ export class SkipReq extends jspb.Message {
   setRecievedUserUid(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): SkipReq.AsObject;
-  static toObject(includeInstance: boolean, msg: SkipReq): SkipReq.AsObject;
+  toObject(includeInstance?: boolean): SkipLikeReq.AsObject;
+  static toObject(includeInstance: boolean, msg: SkipLikeReq): SkipLikeReq.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: SkipReq, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): SkipReq;
-  static deserializeBinaryFromReader(message: SkipReq, reader: jspb.BinaryReader): SkipReq;
+  static serializeBinaryToWriter(message: SkipLikeReq, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SkipLikeReq;
+  static deserializeBinaryFromReader(message: SkipLikeReq, reader: jspb.BinaryReader): SkipLikeReq;
 }
 
-export namespace SkipReq {
+export namespace SkipLikeReq {
   export type AsObject = {
     sentUserUid: string,
     recievedUserUid: string,
@@ -150,8 +151,8 @@ export class ConsentLikeRes extends jspb.Message {
 
   hasRoom(): boolean;
   clearRoom(): void;
-  getRoom(): Like | undefined;
-  setRoom(value?: Like): void;
+  getRoom(): room_pb.Room | undefined;
+  setRoom(value?: room_pb.Room): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ConsentLikeRes.AsObject;
@@ -166,7 +167,7 @@ export class ConsentLikeRes extends jspb.Message {
 export namespace ConsentLikeRes {
   export type AsObject = {
     like?: Like.AsObject,
-    room?: Like.AsObject,
+    room?: room_pb.Room.AsObject,
   }
 }
 

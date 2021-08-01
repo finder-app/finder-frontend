@@ -3,7 +3,7 @@
     <div class="mb-10">
       <h1>お相手から</h1>
     </div>
-    <!-- NOTE: いいねがない場合は空のobjectを代入しているので、 like.id で存在するlikeか判別している -->
+    <!-- NOTE: いいねがある場合 いいねがない場合は空のobjectを代入しているので、like.idでlikeが存在するか判別 -->
     <template v-if="like && like.id">
       <div class="card-wrapper">
         <app-user-detail :user="like.sentUser" />
@@ -28,6 +28,42 @@
           </v-btn>
         </div>
       </div>
+
+      <v-dialog v-model="likedDialog" width="700">
+        <v-card>
+          <v-card-title class="pa-10 d-flex justify-center">
+            <h3>マッチングが成立しました！</h3>
+          </v-card-title>
+
+          <div class="d-flex liked-dialog">
+            <v-img
+              class="border-lightgray liked-dialog-image"
+              src="https://4.bp.blogspot.com/-bTipX3Vmpts/Wn1ZgUbOHXI/AAAAAAABKM4/b31Jvq8aWssiswuiO19BAJmmAC5WAzXwACLcBGAs/s800/character_boy_normal.png"
+            />
+            <v-icon x-large class="ma-10" color="pink lighten-2">
+              mdi-cards-heart
+            </v-icon>
+            <v-img
+              class="border-lightgray liked-dialog-image"
+              src="https://4.bp.blogspot.com/-bTipX3Vmpts/Wn1ZgUbOHXI/AAAAAAABKM4/b31Jvq8aWssiswuiO19BAJmmAC5WAzXwACLcBGAs/s800/character_boy_normal.png"
+            />
+          </div>
+
+          <v-card-actions class="d-flex flex-column pb-10">
+            <app-btn
+              color="pink lighten-2"
+              class="white--text my-10"
+              rounded
+              @click.native="onClickGoToRoom()"
+            >
+              さっそくトークスタート！
+            </app-btn>
+            <v-btn icon @click="onClickCloseLikedDialog()">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </template>
 
     <!-- NOTE: いいねが1件もない場合 -->
@@ -46,9 +82,29 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
 import { Like } from '../../pb/like_pb'
+import { Room } from '../../pb/room_pb'
+
+// NOTE: likeがなかった時に使用するnullを表現するobject
+const likeNullObject: Like.AsObject = {
+  id: 0,
+  sentUserUid: '',
+  recievedUserUid: '',
+  skipped: false,
+  consented: false
+}
+const like = ref<Like.AsObject>(likeNullObject)
+const likedDialog = ref<boolean>(false)
+const room = ref<Room.AsObject>()
+
+const openLikedDialog = () => {
+  likedDialog.value = true
+}
+const closeLikedDialog = () => {
+  likedDialog.value = false
+}
 
 export default defineComponent({
   setup() {
@@ -56,15 +112,6 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    // NOTE: likeがなかった時に使用するnullを表現するobject
-    const likeNullObject: Like.AsObject = {
-      id: 0,
-      sentUserUid: '',
-      recievedUserUid: '',
-      skipped: false,
-      consented: false,
-    }
-    const like = ref<Like.AsObject>(likeNullObject)
     const getOldestLike = async () => {
       try {
         const response = await app.$likeRepository.getOldestLike()
@@ -86,39 +133,53 @@ export default defineComponent({
         await app.$likeRepository.skip(sentUserUid)
         await getOldestLike()
         store.dispatch('message/successMessage', {
-          message: 'スキップしました',
+          message: 'スキップしました'
         })
       } catch (err) {
-        store.dispatch('message/errorMessage', {
-          message: 'エラーが発生しました。画面を更新して再度お試しください。',
-        })
         console.error(err.response)
       }
     }
     const onClickConsent = async (sentUserUid: string) => {
       try {
-        await app.$likeRepository.consent(sentUserUid)
-        store.dispatch('message/successMessage', {
-          message: 'マッチングしました！',
-        })
+        const response = await app.$likeRepository.consent(sentUserUid)
+        room.value = response.data.room
+        openLikedDialog()
       } catch (err) {
-        store.dispatch('message/errorMessage', {
-          message: 'エラーが発生しました。画面を更新して再度お試しください。',
-        })
         console.error(err.response)
       }
     }
+    const onClickGoToRoom = () => {
+      router.push(`/rooms/${room.value!.id}`)
+      closeLikedDialog()
+    }
+    const onClickCloseLikedDialog = async () => {
+      // NOTE: いいねdialogを閉じた後に次のユーザーを表示したいため
+      await getOldestLike()
+      closeLikedDialog()
+    }
     return {
       like,
+      room,
+      likedDialog,
       onClickSkip,
       onClickConsent,
+      onClickGoToRoom,
+      onClickCloseLikedDialog
     }
-  },
+  }
 })
 </script>
 
 <style lang="scss" scoped>
-.border-lightgray {
-  border: 1px solid lightgray;
+.liked-dialog {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.liked-dialog-image {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 50%;
 }
 </style>
