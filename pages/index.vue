@@ -21,7 +21,6 @@ import {
   useRouter
 } from '@nuxtjs/composition-api'
 import { User } from '../pb/user_pb'
-import { Hoge } from '../model/models'
 
 export default defineComponent({
   setup() {
@@ -31,12 +30,6 @@ export default defineComponent({
     const router = useRouter()
     const users = ref<User.AsObject[]>()
     useAsync(async () => {
-      const hoge = ref<Hoge>()
-      hoge.value = {
-        fuga: 'fuga',
-        piyo: 1
-      }
-      console.log('hoge.value', hoge.value)
       try {
         const response = await app.$userRepository.GetUsers()
         users.value = response.data.users
