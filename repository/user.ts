@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios'
 import { ApolloClient } from 'apollo-client'
 // import gql from 'graphql-tag'
 import { Repository } from '~/repository/repository'
-import { User } from '~/pb/user_pb'
+import { User } from '~/finder-protocol-buffers/ts/user_pb'
 
 export class UserRepository extends Repository {
   constructor(axios: AxiosInstance, apollo: ApolloClient<any>) {

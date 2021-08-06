@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client'
 import { Store } from 'vuex'
 import { Context } from '@nuxt/types'
 import { Repository } from '~/repository/repository'
-import { FootPrint } from '~/pb/foot_print_pb'
+import { FootPrint } from '~/finder-protocol-buffers/ts/foot_print_pb'
 
 export class FootPrintRepository extends Repository {
   constructor(axios: AxiosInstance, apollo: ApolloClient<any>, private store: Store<Context>) {
