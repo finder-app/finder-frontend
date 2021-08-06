@@ -28,9 +28,7 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    // const users = ref<User.AsObject[]>()
-    const users = ref<GetUsersRes.AsObject[]>()
-    // users.value.
+    const users = ref<User.AsObject[]>()
     useAsync(async () => {
       try {
         const response = await app.$userRepository.GetUsers()
