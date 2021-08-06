@@ -91,7 +91,7 @@ import {
   useRouter
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
-import { User } from '../../pb/user_pb'
+import { CreateUserReq } from '../../finder-protocol-buffers/ts/user_pb'
 
 export default defineComponent({
   layout: 'auth',
@@ -100,7 +100,7 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    interface SignUpUser extends User.AsObject {
+    interface SignUpUser extends CreateUserReq.AsObject {
       password: string
     }
     const signUpUser = ref<SignUpUser>({
@@ -110,9 +110,7 @@ export default defineComponent({
       lastName: '有村',
       firstName: 'かすみ',
       gender: '女性',
-      //   // NOTE: fullNameをつけないとTSの型でエラー吐く nullでもいけないかなあ〜何とかして
-      fullName: '',
-      liked: false
+      thumbnail: ''
     })
     const signUp = async () => {
       try {

@@ -45,9 +45,9 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter,
+  useRouter
 } from '@nuxtjs/composition-api'
-import { User } from '../../pb/user_pb'
+import { User } from '../../finder-protocol-buffers/ts/user_pb'
 
 export default defineComponent({
   setup() {
@@ -64,7 +64,7 @@ export default defineComponent({
       try {
         await app.$profileRepository.updateProfile(user.value)
         store.dispatch('message/successMessage', {
-          message: '更新しました。',
+          message: '更新しました。'
         })
         router.push('/profile')
       } catch (err) {
@@ -73,8 +73,8 @@ export default defineComponent({
     }
     return {
       user,
-      onClickUpdate,
+      onClickUpdate
     }
-  },
+  }
 })
 </script>

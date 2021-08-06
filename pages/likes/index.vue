@@ -84,8 +84,8 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { Like } from '../../pb/like_pb'
-import { Room } from '../../pb/room_pb'
+import { Like } from '../../finder-protocol-buffers/ts/like_pb'
+import { Room } from '../../finder-protocol-buffers/ts/room_pb'
 
 // NOTE: likeがなかった時に使用するnullを表現するobject
 const likeNullObject: Like.AsObject = {

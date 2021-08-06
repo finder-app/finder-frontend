@@ -20,7 +20,7 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { User } from '../pb/user_pb'
+import { User, GetUsersRes } from '../finder-protocol-buffers/ts/user_pb'
 
 export default defineComponent({
   setup() {
@@ -28,7 +28,9 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    const users = ref<User.AsObject[]>()
+    // const users = ref<User.AsObject[]>()
+    const users = ref<GetUsersRes.AsObject[]>()
+    // users.value.
     useAsync(async () => {
       try {
         const response = await app.$userRepository.GetUsers()

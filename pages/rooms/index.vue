@@ -21,7 +21,7 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { Room } from '../../pb/room_pb'
+import { Room } from '../../finder-protocol-buffers/ts/room_pb'
 
 const rooms = ref<Room.AsObject[]>([])
 

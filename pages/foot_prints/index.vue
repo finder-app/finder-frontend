@@ -23,7 +23,7 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { FootPrint } from '../../pb/foot_print_pb'
+import { FootPrint } from '../../finder-protocol-buffers/ts/foot_print_pb'
 
 export default defineComponent({
   setup() {

@@ -18,7 +18,7 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { Message } from '../../../pb/message_pb'
+import { Message } from '../../../finder-protocol-buffers/ts/message_pb'
 
 const messages = ref<Message.AsObject[]>([])
 
