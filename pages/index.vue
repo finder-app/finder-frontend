@@ -33,7 +33,8 @@ export default defineComponent({
     useAsync(async () => {
       const hoge = ref<Hoge>()
       hoge.value = {
-        fuga: 'fuga'
+        fuga: 'fuga',
+        piyo: 1
       }
       console.log('hoge.value', hoge.value)
       try {
