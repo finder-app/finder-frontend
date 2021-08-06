@@ -14,12 +14,11 @@
           name="メールアドレス"
         >
           <v-text-field
-            v-model="CreateUserReq.email"
+            v-model="signUpUser.email"
             label="メールアドレス"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -32,8 +31,7 @@
             :error-messages="errors"
             outlined
             type="password"
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -41,12 +39,11 @@
           name="名前（性）"
         >
           <v-text-field
-            v-model="CreateUserReq.lastName"
+            v-model="signUpUser.lastName"
             label="名前（性）"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -54,25 +51,24 @@
           name="名前（名）"
         >
           <v-text-field
-            v-model="CreateUserReq.firstName"
+            v-model="signUpUser.firstName"
             label="名前（名）"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider v-slot="{ errors }" rules="required" name="性別">
           <v-select
-            v-model="CreateUserReq.gender"
-            :items="['男性', '女性']"
+            v-model="signUpUser.gender"
+            :items="genders"
             label="性別"
             outlined
             :error-messages="errors"
-          ></v-select>
+          />
         </ValidationProvider>
-        <v-btn :disabled="invalid" @click="signUp()"
-          >新規で登録しまーす！</v-btn
-        >
+        <v-btn :disabled="invalid" @click="signUp()">
+          新規で登録しまーす！
+        </v-btn>
       </ValidationObserver>
     </v-col>
   </v-row>
@@ -91,11 +87,7 @@ import {
   useRouter
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
-<<<<<<< HEAD
 import { CreateUserReq } from '../../finder-protocol-buffers/ts/user_pb'
-=======
-import { CreateUserReq } from '../../pb/user_pb'
->>>>>>> 656c735... fix/signUpの型を変更
 
 export default defineComponent({
   layout: 'auth',
@@ -104,14 +96,11 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-<<<<<<< HEAD
     interface SignUpUser extends CreateUserReq.AsObject {
       password: string
     }
     const signUpUser = ref<SignUpUser>({
-=======
-    const CreateUserReq = ref<CreateUserReq.AsObject>({
->>>>>>> 656c735... fix/signUpの型を変更
+      password: '',
       uid: '',
       email: 'ohishikaito@gmail.com',
       lastName: '有村',
@@ -120,12 +109,13 @@ export default defineComponent({
       thumbnail: ''
     })
     const password = ref<string>('')
+    const genders = ['男性', '女性']
     const signUp = async () => {
       try {
         const response = await firebase
           .auth()
           .createUserWithEmailAndPassword(
-            CreateUserReq.value.email,
+            signUpUser.value.email,
             password.value
           )
         const firebaseUser = response.user!
@@ -147,12 +137,13 @@ export default defineComponent({
       }
     }
     const createUser = async (firebaseUser: firebase.default.User) => {
-      CreateUserReq.value.uid = firebaseUser.uid
-      await app.$userRepository.createUser(CreateUserReq.value)
+      signUpUser.value.uid = firebaseUser.uid
+      await app.$userRepository.createUser(signUpUser.value)
     }
     return {
-      CreateUserReq,
+      signUpUser,
       password,
+      genders,
       signUp
     }
   }
