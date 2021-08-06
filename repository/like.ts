@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios'
 import { ApolloClient } from 'apollo-client'
 import { Repository } from '~/repository/repository'
-import { Like } from '~/pb/like_pb'
+import { Like } from '~/finder-protocol-buffers/ts/like_pb'
 
 export class LikeRepository extends Repository {
   constructor(axios: AxiosInstance, apollo: ApolloClient<any>) {
