@@ -68,40 +68,54 @@ import {
 } from '@nuxtjs/composition-api'
 import { User } from '../../finder-protocol-buffers/ts/user_pb'
 
+const user = ref<User.AsObject>()
+const thumbnail = ref<File>()
+const thumbnailSource = ref<string>('')
+
+const setThumbnail = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  const file = target.files![0]
+  thumbnail.value = file
+  thumbnailSource.value = URL.createObjectURL(file)
+}
+const newRequestFormData = (): FormData => {
+  const requestFormData = new FormData()
+  // NOTE: ref対策
+  if (user.value === undefined) return requestFormData
+  // NOTE: emailとgenderなくてもエラー吐かないので追加しない
+  requestFormData.append('uid', user.value.uid)
+  requestFormData.append('last_name', user.value.lastName)
+  requestFormData.append('first_name', user.value.firstName)
+  if (thumbnail.value instanceof File) {
+    requestFormData.append('thumbnail', thumbnail.value)
+  }
+  return requestFormData
+}
+
 export default defineComponent({
   setup() {
     const { app } = useContext()
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    const user = ref<User.AsObject>()
-    const thumbnail = ref<File>()
-    const thumbnailSource = ref<string>('')
     useAsync(async () => {
       const response = await app.$profileRepository.getProfile()
       user.value = response.data.user
-      // debug
-      // if (user.value.thumbnail) {
-      if (true) {
-        thumbnailSource.value =
-          'https://pics.prcm.jp/b1acb06ec5cf5/84485684/png/84485684_220x220.png'
-      }
+      setThumbnailSource()
     })
-    const createRequestFormData = (): FormData => {
-      const requestFormData = new FormData()
-      // NOTE: ref対策
-      if (user.value === undefined) return requestFormData
-      // NOTE: emailとgenderなくてもエラー吐かない
-      requestFormData.append('uid', user.value.uid)
-      requestFormData.append('last_name', user.value.lastName)
-      requestFormData.append('first_name', user.value.firstName)
-      if (thumbnail.value instanceof File) {
-        requestFormData.append('thumbnail', thumbnail.value)
+    // NOTE: thumbnailが存在すれば実際のURLを代入、存在しなければダミーを代入
+    const setThumbnailSource = () => {
+      if (user.value === undefined) return
+      if (user.value.thumbnail) {
+        thumbnailSource.value = user.value.thumbnail
+      } else {
+        const demoURL =
+          'https://pics.prcm.jp/b1acb06ec5cf5/84485684/png/84485684_220x220.png'
+        thumbnailSource.value = demoURL
       }
-      return requestFormData
     }
     const onClickUpdate = async () => {
-      const requestFormData = createRequestFormData()
+      const requestFormData = newRequestFormData()
       try {
         await app.$profileRepository.updateProfile(requestFormData)
         store.dispatch('message/successMessage', {
@@ -111,12 +125,6 @@ export default defineComponent({
       } catch (err) {
         console.error(err.response)
       }
-    }
-    const setThumbnail = (event: Event) => {
-      const target = event.target as HTMLInputElement
-      const file = target.files![0]
-      thumbnail.value = file
-      thumbnailSource.value = URL.createObjectURL(file)
     }
     return {
       user,
