@@ -8,8 +8,8 @@
         class="img"
         src="https://4.bp.blogspot.com/-bTipX3Vmpts/Wn1ZgUbOHXI/AAAAAAABKM4/b31Jvq8aWssiswuiO19BAJmmAC5WAzXwACLcBGAs/s800/character_boy_normal.png"
       />
-      <p>{{ displayUid(user) }}</p>
-      <p>{{ displayEmail(user) }}</p>
+      <p>{{ displayUid() }}</p>
+      <p>{{ displayEmail() }}</p>
       <p>{{ user.fullName }}</p>
     </nuxt-link>
   </div>

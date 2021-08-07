@@ -18,8 +18,7 @@
             label="メールアドレス"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -27,13 +26,12 @@
           name="パスワード"
         >
           <v-text-field
-            v-model="signUpUser.password"
+            v-model="password"
             label="パスワード"
             :error-messages="errors"
             outlined
             type="password"
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -45,8 +43,7 @@
             label="名前（性）"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider
           v-slot="{ errors }"
@@ -58,21 +55,20 @@
             label="名前（名）"
             :error-messages="errors"
             outlined
-          >
-          </v-text-field>
+          />
         </ValidationProvider>
         <ValidationProvider v-slot="{ errors }" rules="required" name="性別">
           <v-select
             v-model="signUpUser.gender"
-            :items="['男性', '女性']"
+            :items="genders"
             label="性別"
             outlined
             :error-messages="errors"
-          ></v-select>
+          />
         </ValidationProvider>
-        <v-btn :disabled="invalid" @click="signUp()"
-          >新規で登録しまーす！</v-btn
-        >
+        <v-btn :disabled="invalid" @click="signUp()">
+          新規で登録しまーす！
+        </v-btn>
       </ValidationObserver>
     </v-col>
   </v-row>
@@ -104,21 +100,23 @@ export default defineComponent({
       password: string
     }
     const signUpUser = ref<SignUpUser>({
+      password: '',
       uid: '',
       email: 'ohishikaito@gmail.com',
-      password: 'adaadaada',
       lastName: '有村',
       firstName: 'かすみ',
       gender: '女性',
       thumbnail: ''
     })
+    const password = ref<string>('')
+    const genders = ['男性', '女性']
     const signUp = async () => {
       try {
         const response = await firebase
           .auth()
           .createUserWithEmailAndPassword(
             signUpUser.value.email,
-            signUpUser.value.password
+            password.value
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
@@ -144,6 +142,8 @@ export default defineComponent({
     }
     return {
       signUpUser,
+      password,
+      genders,
       signUp
     }
   }

@@ -62,6 +62,8 @@ export default defineComponent({
       try {
         await app.$footPrintRepository.getUnreadCount()
         // NOTE: unreadCountの値が更新された後に値を代入するため
+        // ↓
+        // FIXME: setItem内のunreadCountがリアクティブにならないのでコメントアウト
         setItem()
       } catch (err) {
         console.error(err.response)
@@ -94,7 +96,8 @@ export default defineComponent({
         },
         // ぶっちゃけ足跡数を表示する必要ないけど、使ったしせっかくだから載せておく
         {
-          title: `足跡(${unreadCount.value})`,
+          // title: `足跡(${unreadCount.value})`,
+          title: `足跡`,
           link: '/foot_prints',
           icon: 'mdi-shoe-print'
         },
