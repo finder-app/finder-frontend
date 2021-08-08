@@ -71,7 +71,7 @@ export default defineComponent({
     })
     // NOTE: ワンライナーはreturnなし、ブロックだとreturnが必要
     const unreadCount = computed((): number =>
-      store.getters('unread_count/getUnreadCount')
+      store.getters('unread-count/getUnreadCount')
     )
     const setItem = () => {
       items.value = [
