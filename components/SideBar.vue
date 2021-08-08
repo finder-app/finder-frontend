@@ -109,7 +109,7 @@ export default defineComponent({
       ]
     }
     const signOut = () => {
-      store.dispatch('unsetIdToken')
+      store.dispatch('auth/unsetIdToken')
       router.push('/auth/sign-in')
       setTimeout(() => {
         store.dispatch('message/successMessage', {

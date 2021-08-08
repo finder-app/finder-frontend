@@ -47,7 +47,7 @@ export default defineComponent({
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
-        store.dispatch('setIdToken', { idToken })
+        store.dispatch('auth/setIdToken', { idToken })
         // NOTE: layoutが変わる影響でsuccessMessageが表示できないため、遅延実行する
         setTimeout(() => {
           store.dispatch('message/successMessage', {

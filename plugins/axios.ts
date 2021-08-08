@@ -6,7 +6,7 @@ import snakecaseKeys from 'snakecase-keys'
 export default (ctx: Context) => {
   ctx.app.$axios.onRequest((config: AxiosRequestConfig) => {
     // NOTE: headerに認証情報を追加
-    config.headers.Authorization = `Bearer ${ctx.store.getters['getIdToken']}`
+    config.headers.Authorization = `Bearer ${ctx.store.getters['auth/getIdToken']}`
     console.log(config.headers.Authorization)
 
     // NOTE: config.dataをsnakecaseに変換したくないケースはreturnする
@@ -29,7 +29,7 @@ export default (ctx: Context) => {
   ctx.app.$axios.onError((error: AxiosError) => {
     // NOTE: 401エラーが返されたら認証失敗してるので、sign-inページにリダイレクトさせる
     if (error.response?.status === 401) {
-      ctx.store.dispatch('unsetIdToken')
+      ctx.store.dispatch('auth/unsetIdToken')
       ctx.redirect('/auth/sign-in')
     }
 

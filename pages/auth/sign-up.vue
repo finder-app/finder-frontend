@@ -120,7 +120,7 @@ export default defineComponent({
           )
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
-        store.dispatch('setIdToken', { idToken })
+        store.dispatch('auth/setIdToken', { idToken })
         createUser(firebaseUser)
         router.push('/')
       } catch (err) {

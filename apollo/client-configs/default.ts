@@ -15,7 +15,7 @@ export default (ctx: Context) => {
   return {
     httpEndpoint: `${process.env.BACKEND_ENDPOINT}/query`,
     // NOTE: getAuthでheader Authorizationに追加される
-    getAuth: () => `Bearer ${ctx.store.getters.getIdToken}`,
+    getAuth: () => `Bearer ${ctx.store.getters['auth/getIdToken']}`,
     link: errorHandler
   }
 }
