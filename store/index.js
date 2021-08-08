@@ -1,19 +1,9 @@
-export const state = () => ({
-  unreadCount: 0
-})
-
-export const getters = {
-  getUnreadCount: state => state.unreadCount
-}
-
-export const mutations = {
-  setUnreadCount(state, unreadCount) {
-    state.unreadCount = unreadCount
-  }
-}
-
+// NOTE: nuxt.configのpluginsで読み込むstoreの初期化処理
 export const actions = {
-  setUnreadCount({ commit }, payload) {
-    commit('setUnreadCount', payload.unreadCount)
+  async nuxtClientInit({ commit }, ctx) {
+    const idToken = localStorage.getItem('idToken')
+    if (idToken) {
+      commit('auth/setIdToken', idToken)
+    }
   }
 }

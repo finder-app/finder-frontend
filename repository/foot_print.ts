@@ -20,6 +20,6 @@ export class FootPrintRepository extends Repository {
   async getUnreadCount() {
     const response = await this.axios.get('/foot_prints/unread_count')
     const unreadCount = response.data
-    this.store.dispatch('setUnreadCount', { unreadCount })
+    this.store.dispatch('unread_count/setUnreadCount', { unreadCount })
   }
 }

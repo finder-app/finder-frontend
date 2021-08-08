@@ -70,7 +70,9 @@ export default defineComponent({
       }
     })
     // NOTE: ワンライナーはreturnなし、ブロックだとreturnが必要
-    const unreadCount = computed((): number => store.getters.getUnreadCount)
+    const unreadCount = computed((): number =>
+      store.getters('unread_count/getUnreadCount')
+    )
     const setItem = () => {
       items.value = [
         { title: 'さがす', link: '/', icon: 'mdi-magnify' },
