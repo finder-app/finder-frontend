@@ -1,0 +1,22 @@
+name: build-test
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.0.0'
+      - name: build
+        working-directory: ./
+        run: |
+          yarn install
+          yarn build
