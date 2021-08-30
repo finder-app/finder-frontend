@@ -20,7 +20,7 @@ import {
   computed,
   useRouter
 } from '@nuxtjs/composition-api'
-import { User, GetUsersRess } from '../finder-protocol-buffers/ts/user_pb'
+import { User, GetUsersRes } from '../finder-protocol-buffers/ts/user_pb'
 
 export default defineComponent({
   setup() {
