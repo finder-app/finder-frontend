@@ -1,12 +1,11 @@
-import { AxiosInstance } from 'axios'
-import { ApolloClient } from 'apollo-client'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Store } from 'vuex'
 import { Context } from '@nuxt/types'
 import { Repository } from '~/repository/repository'
 import { FootPrint } from '~/finder-protocol-buffers/ts/foot_print_pb'
 
 export class FootPrintRepository extends Repository {
-  constructor(axios: AxiosInstance, private store: Store<Context>) {
+  constructor(axios: NuxtAxiosInstance, private store: Store<Context>) {
     super(axios)
   }
 

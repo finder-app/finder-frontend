@@ -1,9 +1,9 @@
-import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Repository } from '~/repository/repository'
 import { Room } from '~/finder-protocol-buffers/ts/room_pb'
 
 export class RoomRepository extends Repository {
-  constructor(axios: AxiosInstance) {
+  constructor(axios: NuxtAxiosInstance) {
     super(axios)
   }
 

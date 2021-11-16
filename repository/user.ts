@@ -1,16 +1,16 @@
-import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 // import gql from 'graphql-tag'
 import { Repository } from '~/repository/repository'
 import { User } from '~/finder-protocol-buffers/ts/user_pb'
 
-interface UserRepositoryInterface {
+export interface UserRepositoryInterface {
   GetUsers: () => Promise<User.AsObject[]>
   getUserByUid: (uid: string) => Promise<User.AsObject>
   createUser: (user: User.AsObject) => Promise<User.AsObject>
 }
 
 export class UserRepository extends Repository implements UserRepositoryInterface {
-  constructor(axios: AxiosInstance) {
+  constructor(axios: NuxtAxiosInstance) {
     super(axios)
   }
 

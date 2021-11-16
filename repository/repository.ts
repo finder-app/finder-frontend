@@ -1,10 +1,10 @@
-import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 // import { ApolloClient } from 'apollo-client'
 
 export class Repository {
-  protected readonly axios: AxiosInstance
+  protected readonly axios: NuxtAxiosInstance
 
-  constructor(axios: AxiosInstance) {
+  constructor(axios: NuxtAxiosInstance) {
     this.axios = axios
   }
 

@@ -1,9 +1,10 @@
-import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
+
 import { Repository } from '~/repository/repository'
 import { Like } from '~/finder-protocol-buffers/ts/like_pb'
 
 export class LikeRepository extends Repository {
-  constructor(axios: AxiosInstance) {
+  constructor(axios: NuxtAxiosInstance) {
     super(axios)
   }
 

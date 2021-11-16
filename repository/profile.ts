@@ -1,10 +1,11 @@
-import { AxiosInstance } from 'axios'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
+
 import { Repository } from '~/repository/repository'
 import { User } from '~/finder-protocol-buffers/ts/user_pb'
 import { GetProfileRes, UpdateProfileRes } from '~/finder-protocol-buffers/ts/profile_pb'
 
 export class ProfileRepository extends Repository {
-  constructor(axios: AxiosInstance) {
+  constructor(axios: NuxtAxiosInstance) {
     super(axios)
   }
 
