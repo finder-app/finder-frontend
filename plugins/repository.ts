@@ -9,12 +9,12 @@ import { RoomRepository } from '~/repository/room'
 // pluginsでexport default(ctx)=>だと、ctx.$Hogeみたいに取れるようになる
 const RepositoryPlugin: Plugin = (ctx, inject) => {
   const axios = ctx.app.$axios
-  const apollo = ctx.app.apolloProvider.defaultClient
-  inject('userRepository', new UserRepository(axios, apollo))
-  inject('footPrintRepository', new FootPrintRepository(axios, apollo, ctx.store))
-  inject('profileRepository', new ProfileRepository(axios, apollo))
-  inject('likeRepository', new LikeRepository(axios, apollo))
-  inject('roomRepository', new RoomRepository(axios, apollo))
+  // const apollo = ctx.app.apolloProvider.defaultClient
+  inject('userRepository', new UserRepository(axios))
+  inject('footPrintRepository', new FootPrintRepository(axios, ctx.store))
+  inject('profileRepository', new ProfileRepository(axios))
+  inject('likeRepository', new LikeRepository(axios))
+  inject('roomRepository', new RoomRepository(axios))
 }
 
 export default RepositoryPlugin

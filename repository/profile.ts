@@ -1,12 +1,11 @@
 import { AxiosInstance } from 'axios'
-import { ApolloClient } from 'apollo-client'
 import { Repository } from '~/repository/repository'
 import { User } from '~/finder-protocol-buffers/ts/user_pb'
 import { GetProfileRes, UpdateProfileRes } from '~/finder-protocol-buffers/ts/profile_pb'
 
 export class ProfileRepository extends Repository {
-  constructor(axios: AxiosInstance, apollo: ApolloClient<any>) {
-    super(axios, apollo)
+  constructor(axios: AxiosInstance) {
+    super(axios)
   }
 
   getProfile(): Promise<GetProfileRes> {

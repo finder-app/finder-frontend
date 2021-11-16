@@ -6,8 +6,8 @@ import { Repository } from '~/repository/repository'
 import { FootPrint } from '~/finder-protocol-buffers/ts/foot_print_pb'
 
 export class FootPrintRepository extends Repository {
-  constructor(axios: AxiosInstance, apollo: ApolloClient<any>, private store: Store<Context>) {
-    super(axios, apollo)
+  constructor(axios: AxiosInstance, private store: Store<Context>) {
+    super(axios)
   }
 
   async GetFootPrints(): Promise<FootPrint.AsObject[]> {

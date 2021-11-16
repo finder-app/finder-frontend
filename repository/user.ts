@@ -1,15 +1,20 @@
 import { AxiosInstance } from 'axios'
-import { ApolloClient } from 'apollo-client'
 // import gql from 'graphql-tag'
 import { Repository } from '~/repository/repository'
 import { User } from '~/finder-protocol-buffers/ts/user_pb'
 
-export class UserRepository extends Repository {
-  constructor(axios: AxiosInstance, apollo: ApolloClient<any>) {
-    super(axios, apollo)
+interface UserRepositoryInterface {
+  GetUsers: () => Promise<User.AsObject[]>
+  getUserByUid: (uid: string) => Promise<User.AsObject>
+  createUser: (user: User.AsObject) => Promise<User.AsObject>
+}
+
+export class UserRepository extends Repository implements UserRepositoryInterface {
+  constructor(axios: AxiosInstance) {
+    super(axios)
   }
 
-  GetUsers(): Promise<User.AsObject[] | void> {
+  GetUsers(): Promise<User.AsObject[]> {
     return this.axios.get(`/users`)
     // NOTE: GraphQLの場合は、default.tsでerror handlingするのでerr処理を書くな
     // return await this.apollo.query({
@@ -26,10 +31,10 @@ export class UserRepository extends Repository {
     //     `
     // })
   }
-  getUserByUid(uid: string): Promise<User.AsObject | void> {
+  getUserByUid(uid: string): Promise<User.AsObject> {
     return this.axios.get(`/users/${uid}`)
   }
-  createUser(user: User.AsObject): Promise<User.AsObject | void> {
+  createUser(user: User.AsObject): Promise<User.AsObject> {
     return this.axios.post('/users', user)
   }
 }
