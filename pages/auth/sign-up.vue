@@ -105,11 +105,7 @@ export default defineComponent({
       UserRepositoryClient
     ) as UserRepositoryInterface
 
-    interface SignUpUser extends CreateUserReq.AsObject {
-      password: string
-    }
-    const signUpUser = ref<SignUpUser>({
-      password: 'adaadaada',
+    const signUpUser = ref<CreateUserReq.AsObject>({
       uid: '',
       email: 'ohishikaito@gmail.com',
       lastName: '有村',
