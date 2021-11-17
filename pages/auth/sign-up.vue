@@ -84,10 +84,15 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter
+  useRouter,
+  inject
 } from '@nuxtjs/composition-api'
 import firebase from '../../plugins/firebase'
 import { CreateUserReq } from '../../finder-protocol-buffers/ts/user_pb'
+import {
+  UserRepositoryClient,
+  UserRepositoryInterface
+} from '../../repository/user'
 
 export default defineComponent({
   layout: 'auth',
@@ -96,11 +101,11 @@ export default defineComponent({
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    interface SignUpUser extends CreateUserReq.AsObject {
-      password: string
-    }
-    const signUpUser = ref<SignUpUser>({
-      password: '',
+    const userClient = inject<UserRepositoryInterface>(
+      UserRepositoryClient
+    ) as UserRepositoryInterface
+
+    const signUpUser = ref<CreateUserReq.AsObject>({
       uid: '',
       email: 'ohishikaito@gmail.com',
       lastName: '有村',
@@ -121,7 +126,7 @@ export default defineComponent({
         const firebaseUser = response.user!
         const idToken = await firebaseUser.getIdToken(/* forceRefresh */ true)
         store.dispatch('auth/setIdToken', { idToken })
-        createUser(firebaseUser)
+        await createUser(firebaseUser)
         router.push('/')
       } catch (err) {
         if (err.code === 'auth/email-already-in-use') {
@@ -138,7 +143,7 @@ export default defineComponent({
     }
     const createUser = async (firebaseUser: firebase.default.User) => {
       signUpUser.value.uid = firebaseUser.uid
-      await app.$userRepository.createUser(signUpUser.value)
+      await userClient.createUser(signUpUser.value)
     }
     return {
       signUpUser,

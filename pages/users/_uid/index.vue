@@ -26,9 +26,14 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter
+  useRouter,
+  inject
 } from '@nuxtjs/composition-api'
 import { User } from '../../../finder-protocol-buffers/ts/user_pb'
+import {
+  UserRepositoryClient,
+  UserRepositoryInterface
+} from '../../../repository/user'
 
 export default defineComponent({
   setup() {
@@ -37,11 +42,13 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
     const user = ref<User.AsObject>()
+
+    const userClient = inject<UserRepositoryInterface>(
+      UserRepositoryClient
+    ) as UserRepositoryInterface
+
     useAsync(async () => {
-      const response = await app.$userRepository.getUserByUid(
-        route.value.params.uid
-      )
-      user.value = response.data.user
+      user.value = await userClient.getUserByUid(route.value.params.uid)
     })
     const onClickLike = async (userUid: string) => {
       try {
