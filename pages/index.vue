@@ -18,21 +18,29 @@ import {
   useRoute,
   useStore,
   computed,
-  useRouter
+  useRouter,
+  inject
 } from '@nuxtjs/composition-api'
-import { User, GetUsersRes } from '../finder-protocol-buffers/ts/user_pb'
-
+import { User } from '../finder-protocol-buffers/ts/user_pb'
+import {
+  UserRepositoryClient,
+  UserRepositoryInterface
+} from '../repository/user'
 export default defineComponent({
   setup() {
     const { app } = useContext()
     const route = useRoute()
     const store = useStore()
     const router = useRouter()
-    const users = ref<User.AsObject[]>()
+    const users = ref<User.AsObject[]>([])
+
+    const userClient = inject<UserRepositoryInterface>(
+      UserRepositoryClient
+    ) as UserRepositoryInterface
+
     useAsync(async () => {
       try {
-        const response = await app.$userRepository.GetUsers()
-        users.value = response.data.users
+        users.value = await userClient.GetUsers()
       } catch (err) {
         console.error(err.response)
       }
